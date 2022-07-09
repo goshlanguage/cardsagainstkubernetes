@@ -18,66 +18,42 @@ h1 {
     margin: 0 0.5em;
 }
 
-.Adlib-cards {
+.card {
     font-family: 'Ubuntu', sans-serif;
     font-size: 20px;
-        min-height: 20em;
-        max-height: 30em;
-    margin: 0 0.5em;
-    padding: 3em 0 0 0;
+    margin: 0.5em;
+        min-height: 15em !important;
+}
+
+.card ::selection {
+    background: transparent;
+}
+
+.card ::-moz-selection {
+    background: transparent;
+}
+
+.Adlib-cards {
     cursor: grab;
 }
-
-.Adlib-cards ::selection {
-    background: transparent;
-}
-
-.Adlib-cards ::-moz-selection {
-    background: transparent;
-}
-
 .Default-cards {
-    font-family: 'Ubuntu', sans-serif;
-    font-size: 20px;
-    min-height: 20em;
-    margin: 0 0.5em;
-    padding: 3em 0 0 0;
     background-color: #fff;
     color: rgb(0, 89, 255);
-    width: '18rem';
 }
 
 .prompt-banner {
     margin: 1em 0;
 }
+
 .Prompt-cards {
-    font-family: 'Ubuntu', sans-serif;
-    font-size: 20px;
-        min-height: 20em;
-    margin: 0 0.5em;
-    padding: 3em 0 0 0;
     background-color: #282c34 !important;
     color: white;
-    width: '18rem';
-}
-
-.Prompt-cards ::selection {
-    background: transparent;
-}
-
-.Prompt-cards ::-moz-selection {
-    background: transparent;
-}
-
-
-.card-title {
-    min-height: 15vh;
-}
-
-.card-text {
-    min-height: 20vh;
 }
 
 button {
     font-size: calc(10px + 2vmin);
+}
+
+.toast {
+    width: 100% !important;
 }
