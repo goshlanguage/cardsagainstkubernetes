@@ -10,6 +10,9 @@ h1 {
     font-family: 'Ubuntu', sans-serif;
 }
 
+.h1 {
+    font-size: 1em;
+}
 .kubernetes-logo {
     max-width: 2em;
     margin: 0 0.5em;
@@ -17,8 +20,9 @@ h1 {
 
 .Adlib-cards {
     font-family: 'Ubuntu', sans-serif;
-    min-height: 25em;
-    display: flex;
+    font-size: 20px;
+        min-height: 20em;
+        max-height: 30em;
     margin: 0 0.5em;
     padding: 3em 0 0 0;
     cursor: grab;
@@ -32,14 +36,29 @@ h1 {
     background: transparent;
 }
 
+.Default-cards {
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 20px;
+    min-height: 20em;
+    margin: 0 0.5em;
+    padding: 3em 0 0 0;
+    background-color: #fff;
+    color: rgb(0, 89, 255);
+    width: '18rem';
+}
+
+.prompt-banner {
+    margin: 1em 0;
+}
 .Prompt-cards {
     font-family: 'Ubuntu', sans-serif;
-    min-height: 25em;
+    font-size: 20px;
+        min-height: 20em;
     margin: 0 0.5em;
     padding: 3em 0 0 0;
     background-color: #282c34 !important;
     color: white;
-        
+    width: '18rem';
 }
 
 .Prompt-cards ::selection {
@@ -51,18 +70,14 @@ h1 {
 }
 
 
-.cardTitle {
-    min-height: 20vh;
+.card-title {
+    min-height: 15vh;
 }
 
-.cardText {
+.card-text {
     min-height: 20vh;
 }
 
 button {
     font-size: calc(10px + 2vmin);
-}
-.hand {
-    display: flex;
-    flex-direction: row;
 }

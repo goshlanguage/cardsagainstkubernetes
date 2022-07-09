@@ -1,17 +1,26 @@
-import { Card } from 'react-bootstrap';
+import Col from 'react-bootstrap/Col';
 
-function Prompt() {
+function Prompt(props) {
     return (
-        <Card className="Prompt-cards" style={{ width: '18rem' }}>
-            <Card.Body>
-                <Card.Title className="cardTitle"></Card.Title>
-                <Card.Text className="cardText">
-                    Your next retrospective will be caused by ____________
-                </Card.Text>
-
-            </Card.Body>
-        </Card>
+        <Col md="3">
+            <div className="rounded-3 shadow-sm Prompt-cards">
+                <div className="card-body">
+                    <h1 className="card-title">
+                        {props.title}
+                    </h1>
+                    <ul className="list-unstyled mt-3">
+                        <li>{props.text}</li>
+                    </ul>
+                </div>
+            </div>
+        </Col>
     )
 }
 
 export default Prompt;
+
+export function RetroPrompt() {
+    return (
+        <Prompt text="Your next retrospective will be caused by ____________" />
+    )
+}

@@ -1,87 +1,76 @@
+import { useState } from 'react'
 import { Card } from 'react-bootstrap';
 import Col from 'react-bootstrap/Col';
+import Fade from 'react-bootstrap/Fade'
 
+function Adlib(props) {
+    const [open, setOpen] = useState(true);
 
-function Adlib() {
+    let listItems = ""
+
+    if (props !== undefined && props.lines !== undefined) {
+        listItems = props.lines.map((item) => <li key={item}>{item}</li>);
+    }
+
     return (
-        <Card className="Adlib-cards" style={{ width: '18rem' }}>
-            <Card.Body>
-                <Card.Title className="cardTitle">DNS</Card.Title>
-                <Card.Text className="cardText">
-                    It's always DNS.
-                </Card.Text>
-
-            </Card.Body>
-        </Card>
+        <Col>
+            <Fade in={open}>
+                <Card className="card Adlib-cards rounded-3 shadow-sm" onClick={() => setOpen(!open)} >
+                    <Card.Body>
+                        <Card.Title><h1>{props.title} <small className="text-muted fw-light">{props.titlealt}</small></h1></Card.Title>
+                        <Card.Text>
+                            {props.text}
+                            <ul className="list-unstyled mt-3">
+                                {listItems}
+                            </ul>
+                        </Card.Text>
+                    </Card.Body>
+                </Card>
+            </Fade>
+        </Col >
     )
 }
 
 export default Adlib;
 
-export function DNSCard() {
+export function OPACard() {
     return (
-        <div className="row mb-3 text-center">
-            <Col>
-                <div className="card mb-4 rounded-3 shadow-sm Adlib-cards">
-                    <div className="card-body">
-                        <h1 className="card-title">It's always <small className="text-muted fw-light">DNS</small></h1>
-                        <ul className="list-unstyled mt-3 mb-4">
-                            <li>It's not DNS</li>
-                            <li>There's no way its DNS</li>
-                            <li>It was DNS</li>
-                        </ul>
-                    </div>
-                </div>
-            </Col>
-        </div>
+        <Adlib title="OPA!" />
+    )
+}
+
+export function DNSCard() {
+    let lines = [
+        "It's not DNS",
+        "There's no way its DNS",
+        "It was DNS",
+    ];
+
+    return (
+        <Adlib title="It's always" titlealt="DNS" lines={lines} />
     )
 }
 
 export function CacheCheckCard() {
     return (
-        <Card style={{ width: '18rem' }}>
-            <Card.Img variant="top" src="holder.js/100px180" />
-            <Card.Body>
-                <Card.Title></Card.Title>
-                <Card.Text>
-                    Did you clear the cache?
-                </Card.Text>
-
-            </Card.Body>
-        </Card>
+        <Adlib title="Did you clear your cache?!" />
     )
 }
 
 export function CacheMeOutsideCard() {
     return (
-        <div className="row mb-3 text-center">
-            <Col>
-                <div className="card mb-4 rounded-3 shadow-sm Adlib-cards">
-                    <div className="card-body">
-                        <h1 className="card-title">Cache <small className="text-muted fw-light">me</small></h1>
-                        <ul className="list-unstyled mt-3 mb-4">
-                            <li>Outside</li>
-                        </ul>
-                    </div>
-                </div>
-            </Col>
-        </div>
+        <Adlib title="Cache" titlealt="me" text="Outside" />
     )
 }
 
 export function CurlBashCard() {
     return (
-        <div className="row mb-3 text-center">
-            <Col>
-                <div className="card mb-4 rounded-3 shadow-sm Adlib-cards">
-                    <div className="card-body">
-                        <h1 className="card-title">curl <small className="text-muted fw-light">| bash</small></h1>
-                        <p>
-                            Straight from StackOverflow
-                        </p>
-                    </div>
-                </div>
-            </Col>
-        </div>
+        <Adlib title="curl" titlealt="| bash" text="Straight from StackOverflow" />
+    )
+}
+
+export function WrongContextCard() {
+    return (
+        <Adlib title="Oops" titlealt="!" text="Wrong Kube Context" />
     )
 }
