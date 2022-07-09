@@ -1,12 +1,14 @@
 import { useState } from 'react'
 import './App.css'
-import Adlib, { CacheMeOutsideCard, CurlBashCard, DNSCard } from './components/Adlib'
-import Prompt from './components/Prompt'
+import { CacheMeOutsideCard, CurlBashCard, DNSCard, OPACard, WrongContextCard } from './components/Adlib'
+import { RetroPrompt } from './components/Prompt'
+import DefaultCard from './components/DefaultCard'
 
 import Toast from 'react-bootstrap/Toast';
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 import Header from './components/Header'
+import Row from 'react-bootstrap/Row'
 
 
 const Hand = ({ children }) => {
@@ -29,20 +31,28 @@ const App = () => (
   <Container className="py-3">
     <Header />
     <main>
-      <Container className="p-5 mb-4 bg-light rounded-3">
-        <h1 className="header">The prompt</h1>
-        <Prompt />
+      <Container className="p-3 prompt-banner bg-light rounded-3">
+        <div className="row mb-3 text-center">
+          <RetroPrompt />
+          <DefaultCard />
+          <DefaultCard />
+        </div>
+        <h1 className="header fw-muted">The prompt</h1>
       </Container>
 
       <div className="hand">
-        <CacheMeOutsideCard />
-        <CurlBashCard />
-        <DNSCard />
-        <CurlBashCard />
-        <CacheMeOutsideCard />
+        <Row className="mb-3 text-center">
+          <CacheMeOutsideCard />
+          <CurlBashCard />
+          <DNSCard />
+          <WrongContextCard />
+          <OPACard />
+        </Row>
       </div>
 
+      <div>
 
+      </div>
     </main>
 
   </Container>
