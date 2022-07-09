@@ -1,23 +1,44 @@
+import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
 
 function Prompt(props) {
+    let listItems = ""
+
+    if (props !== undefined && props.lines !== undefined) {
+        listItems = props.lines.map((item) => <li key={item}>{item}</li>);
+    }
+
     return (
         <Col md="3">
-            <div className="rounded-3 shadow-sm Prompt-cards">
-                <div className="card-body">
-                    <h1 className="card-title">
-                        {props.title}
-                    </h1>
+            <Card className="Prompt-cards rounded-3 shadow-sm">
+                <Card.Body>
+                    <Card.Text>
+                        {props.text}
+                    </Card.Text>
                     <ul className="list-unstyled mt-3">
-                        <li>{props.text}</li>
+                        <small>
+                            {listItems}
+                        </small>
                     </ul>
-                </div>
-            </div>
+                </Card.Body>
+            </Card>
         </Col>
     )
 }
 
 export default Prompt;
+
+export function LostInternPrompt() {
+    return (
+        <Prompt text="We just lost our intern, ____________" />
+    )
+}
+
+export function LegalPrompt() {
+    return (
+        <Prompt text="Uh, Legal said they needed ____________ by next week" />
+    )
+}
 
 export function RetroPrompt() {
     return (

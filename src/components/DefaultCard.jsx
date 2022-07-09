@@ -1,20 +1,25 @@
+import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
 
-function DefaultCard() {
+function DefaultCard(props) {
+    let listItems = ""
+
+    if (props !== undefined && props.lines !== undefined) {
+        listItems = props.lines.map((item) => <li key={item}>{item}</li>);
+    }
+
     return (
         <Col md="3">
-            <div className="card rounded-3 shadow-sm Default-cards">
-                <div className="card-body">
-                    <h1 className="card-title">
-
-                    </h1>
-                    <ul className="list-unstyled mt-3 mb-4">
-                        <li>
-
-                        </li>
+            <Card className="Default-cards rounded-3 shadow-sm">
+                <Card.Body>
+                    <Card.Text>
+                        {props.text}
+                    </Card.Text>
+                    <ul className="list-unstyled mt-3">
+                        {listItems}
                     </ul>
-                </div>
-            </div>
+                </Card.Body>
+            </Card>
         </Col>
     )
 }

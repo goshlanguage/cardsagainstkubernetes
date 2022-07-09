@@ -1,7 +1,7 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import './App.css'
-import { CacheMeOutsideCard, CurlBashCard, DNSCard, OPACard, WrongContextCard } from './components/Adlib'
-import { RetroPrompt } from './components/Prompt'
+import { AccidentalDDOSCard, CacheMeOutsideCard, CurlBashCard, DNSCard, OPACard, TooManyLogsCard, WrongContextCard } from './components/Adlib'
+import { LegalPrompt, LostInternPrompt, RetroPrompt } from './components/Prompt'
 import DefaultCard from './components/DefaultCard'
 
 import Toast from 'react-bootstrap/Toast';
@@ -27,35 +27,69 @@ const Hand = ({ children }) => {
   );
 };
 
-const App = () => (
-  <Container className="py-3">
-    <Header />
-    <main>
-      <Container className="p-3 prompt-banner bg-light rounded-3">
-        <div className="row mb-3 text-center">
-          <RetroPrompt />
-          <DefaultCard />
-          <DefaultCard />
-        </div>
-        <h1 className="header fw-muted">The prompt</h1>
-      </Container>
+function App() {
+  // create prompt deck then shuffle it
+  let PromptDeck = [LostInternPrompt, LegalPrompt, RetroPrompt];
+  shuffle(PromptDeck);
 
-      <div className="hand">
-        <Row className="mb-3 text-center">
-          <CacheMeOutsideCard />
-          <CurlBashCard />
-          <DNSCard />
-          <WrongContextCard />
-          <OPACard />
-        </Row>
-      </div>
+  let promptRendered = React.createElement(PromptDeck.pop());
 
-      <div>
 
-      </div>
-    </main>
+  // Create adlib deck, then draw for the user
+  let AdlibDeck = [AccidentalDDOSCard, CacheMeOutsideCard, CurlBashCard, DNSCard, OPACard, TooManyLogsCard, WrongContextCard];
+  shuffle(AdlibDeck);
 
-  </Container>
-);
+  let playerHand = AdlibDeck.slice(AdlibDeck.length - 5);
+
+  let playerHandRendered = [];
+
+  playerHand.forEach((x, key) => {
+    playerHandRendered.push(React.createElement(x, { key: key }));
+  })
+
+  return (
+    <Container className="py-3">
+      <Header />
+      <main>
+        <Container className="p-3 prompt-banner bg-light rounded-3">
+          <Row className="row mb-3">
+            {promptRendered}
+            <DefaultCard />
+            <DefaultCard />
+          </Row>
+          <h1 className="header fw-muted">The prompt</h1>
+        </Container>
+
+        <Container className="p-3 prompt-banner bg-light rounded-3">
+          <Hand>
+            <Row>
+              {playerHandRendered}
+            </Row>
+          </Hand>
+        </Container>
+      </main>
+    </Container>
+  )
+}
+
+// unbiased shuffle algorithm (Fisher-Yates aka Knuth shuffle)
+//    https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle
+function shuffle(array) {
+  let currentIndex = array.length, randomIndex;
+
+  // While there remain elements to shuffle.
+  while (currentIndex != 0) {
+
+    // Pick a remaining element.
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
+
+    // And swap it with the current element.
+    [array[currentIndex], array[randomIndex]] = [
+      array[randomIndex], array[currentIndex]];
+  }
+
+  return array;
+}
 
 export default App

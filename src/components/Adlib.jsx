@@ -12,18 +12,32 @@ function Adlib(props) {
         listItems = props.lines.map((item) => <li key={item}>{item}</li>);
     }
 
+    // if there is a title and text, lets add a line break to break up the card a little
+    // if there is a title and or title text, the title break being a space will appropriately typeset the 
+    // card. If there is title and text, we should line break. If there is only text, we should have no spacing.
+    let title_break = " ";
+    if (props.text != undefined && props.title != undefined) {
+        title_break = <br />;
+    }
+    if (props.text != "" && props.title === undefined && props.titlealt === undefined) {
+        title_break = "";
+    }
+
     return (
         <Col>
             <Fade in={open}>
-                <Card className="card Adlib-cards rounded-3 shadow-sm" onClick={() => setOpen(!open)} >
+                <Card className="Adlib-cards rounded-3 shadow-sm" onClick={() => setOpen(!open)} >
                     <Card.Body>
-                        <Card.Title><h1>{props.title} <small className="text-muted fw-light">{props.titlealt}</small></h1></Card.Title>
                         <Card.Text>
+                            {props.title} <span className="text-muted fw-light">{props.titlealt}</span>
+                            {title_break}
                             {props.text}
-                            <ul className="list-unstyled mt-3">
-                                {listItems}
-                            </ul>
                         </Card.Text>
+                            <ul className="list-unstyled mt-3">
+                            <small>
+                                {listItems}
+                            </small>
+                        </ul>
                     </Card.Body>
                 </Card>
             </Fade>
@@ -51,6 +65,12 @@ export function DNSCard() {
     )
 }
 
+export function AccidentalDDOSCard() {
+    return (
+        <Adlib text="accidentally DDOSing yourself" />
+    )
+}
+
 export function CacheCheckCard() {
     return (
         <Adlib title="Did you clear your cache?!" />
@@ -66,6 +86,12 @@ export function CacheMeOutsideCard() {
 export function CurlBashCard() {
     return (
         <Adlib title="curl" titlealt="| bash" text="Straight from StackOverflow" />
+    )
+}
+
+export function TooManyLogsCard() {
+    return (
+        <Adlib text="too many logs" />
     )
 }
 
