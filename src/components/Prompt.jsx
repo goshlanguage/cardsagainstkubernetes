@@ -28,6 +28,12 @@ function Prompt(props) {
 
 export default Prompt;
 
+export function BossMeetingPrompt() {
+    return (
+        <Prompt text="Boss says they need to meet with you. Something about ____________" />
+    )
+}
+
 export function LostInternPrompt() {
     return (
         <Prompt text="We just lost our intern, ____________" />

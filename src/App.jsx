@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import './App.css'
-import { AccidentalDDOSCard, CacheMeOutsideCard, CurlBashCard, DNSCard, OPACard, TooManyLogsCard, WrongContextCard } from './components/Adlib'
-import { LegalPrompt, LostInternPrompt, RetroPrompt } from './components/Prompt'
+import { AccidentalDDOSCard, CacheMeOutsideCard, CurlBashCard, DNSCard, OPACard, SoxAuditCard, TooManyLogsCard, WrongContextCard } from './components/Adlib'
+import { BossMeetingPrompt, LegalPrompt, LostInternPrompt, RetroPrompt } from './components/Prompt'
 import DefaultCard from './components/DefaultCard'
 
 import Toast from 'react-bootstrap/Toast';
@@ -29,14 +29,14 @@ const Hand = ({ children }) => {
 
 function App() {
   // create prompt deck then shuffle it
-  let PromptDeck = [LostInternPrompt, LegalPrompt, RetroPrompt];
+  let PromptDeck = [BossMeetingPrompt, LostInternPrompt, LegalPrompt, RetroPrompt];
   shuffle(PromptDeck);
 
   let promptRendered = React.createElement(PromptDeck.pop());
 
 
   // Create adlib deck, then draw for the user
-  let AdlibDeck = [AccidentalDDOSCard, CacheMeOutsideCard, CurlBashCard, DNSCard, OPACard, TooManyLogsCard, WrongContextCard];
+  let AdlibDeck = [AccidentalDDOSCard, CacheMeOutsideCard, CurlBashCard, DNSCard, OPACard, SoxAuditCard, TooManyLogsCard, WrongContextCard];
   shuffle(AdlibDeck);
 
   let playerHand = AdlibDeck.slice(AdlibDeck.length - 5);

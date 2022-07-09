@@ -47,12 +47,6 @@ function Adlib(props) {
 
 export default Adlib;
 
-export function OPACard() {
-    return (
-        <Adlib title="OPA!" />
-    )
-}
-
 export function DNSCard() {
     let lines = [
         "It's not DNS",
@@ -86,6 +80,18 @@ export function CacheMeOutsideCard() {
 export function CurlBashCard() {
     return (
         <Adlib title="curl" titlealt="| bash" text="Straight from StackOverflow" />
+    )
+}
+
+export function OPACard() {
+    return (
+        <Adlib title="OPA!" />
+    )
+}
+
+export function SoxAuditCard() {
+    return (
+        <Adlib text="a last minute sox audit" />
     )
 }
 
