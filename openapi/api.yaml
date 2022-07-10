@@ -1,0 +1,222 @@
+openapi: "3.0.0"
+info:
+  version: 0.0.1
+  title: Cards Against Kubernetes API
+  description: A simple API that is used to store gamestate
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+servers:
+  - url: https://cakapi.hartje.io/api/v1/alpha1/
+  - url: http://localhost:3000/api/v1/alpha1/
+paths:
+  /games/:
+    get:
+      summary: Returns all games
+      description: |
+        Returns all games from the system that the user has access to
+      operationId: findGames
+      parameters:
+        - name: tags
+          in: query
+          description: tags to filter by
+          required: false
+          style: form
+          schema:
+            type: array
+            items:
+              type: string
+        - name: limit
+          in: query
+          description: maximum number of results to return
+          required: false
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: game response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Game'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      summary: Creates a new game
+      description: Creates a new game in the store.
+      operationId: addGame
+      requestBody:
+        description: Game to add to the store
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewGame'
+      responses:
+        '200':
+          description: game response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Game'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /games/{id}:
+    get:
+      summary: Returns a game by ID
+      description: Returns a game based on a single ID
+      operationId: findGameByID
+      parameters:
+        - name: id
+          in: path
+          description: ID of game to fetch
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: game response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Game'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    delete:
+      summary: Deletes a game by ID
+      description: deletes a single game based on the ID supplied
+      operationId: deleteGame
+      parameters:
+        - name: id
+          in: path
+          description: ID of game to delete
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: game deleted
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    Game:
+      allOf:
+        - $ref: '#/components/schemas/NewGame'
+
+    NewGame:
+      properties:
+        id:
+          type: string
+          description: 4 character unique string for the game
+        players:
+          type: array
+          items:
+            $ref: '#/components/schemas/Player'
+        adlibDeck:
+          type: array
+          items:
+            $ref: '#/components/schemas/Card'
+        promptDeck:
+          type: array
+          items:
+            $ref: '#/components/schemas/Card'
+        promptSubmissions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Card'
+        rounds:
+          type: number
+          description: Number of rounds the game has progressed
+
+    Player:
+      allOf:
+        - $ref: '#/components/schemas/NewPlayer'
+        - required:
+          - id
+          properties:
+            id:
+              type: string
+              description: Unique id of the player
+
+    NewPlayer:
+      required:
+        - name
+      properties:
+        id:
+          type: string
+          description: Unique id of the player
+        name:
+          type: string
+          description: Name of the player
+        icon:
+          type: string
+          description: icon to display for the user
+        hand:
+          type: array
+          items:
+            $ref: '#/components/schemas/Card'
+        score:
+          type: number
+          description: user's current score
+            
+
+    Card:
+      allOf:
+        - $ref: '#/components/schemas/NewCard'
+        - required:
+          - id
+          properties:
+            id:
+              type: string
+              description: Unique id of the card
+
+    NewCard:
+      required:
+        - name
+      properties:
+        id:
+          type: string
+          description: Unique id of the card
+        title:
+          type: string
+          description: Card title
+        titlealt:
+          type: string
+          description: Card title alternate text, displayed after the title and in an alternate font color
+        text:
+          type: string
+          description: Card body text
+
+    Error:
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: integer
+          format: int32
+          description: Error code
+        message:
+          type: string
+          description: Error message
+          
