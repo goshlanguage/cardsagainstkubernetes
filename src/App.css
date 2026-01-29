@@ -63,14 +63,14 @@ h1 {
 /* Specific styling for when the user selects the correct card */
 .correct.selected-card {
     border-color: #326ce5 !important; /* Kubernetes blue */
-    box-shadow: 0 0 10px rgba(50, 108, 229, 0.6) !important; /* Initial blue glow */
     animation: breathing-glow 2s ease-in-out infinite;
+    /* Base glow is now handled by the animation */
 }
 
 @keyframes breathing-glow {
-    0% { box-shadow: 0 0 10px rgba(50, 108, 229, 0.6) !important; }
-    50% { box-shadow: 0 0 25px rgba(50, 108, 229, 0.9) !important; }
-    100% { box-shadow: 0 0 10px rgba(50, 108, 229, 0.6) !important; }
+    0% { box-shadow: 0 0 8px rgba(50, 108, 229, 0.8), 0 0 20px rgba(200, 220, 255, 0.3) !important; }
+    50% { box-shadow: 0 0 16px rgba(50, 108, 229, 0.9), 0 0 35px rgba(200, 220, 255, 0.5) !important; }
+    100% { box-shadow: 0 0 8px rgba(50, 108, 229, 0.8), 0 0 20px rgba(200, 220, 255, 0.3) !important; }
 }
 
 
@@ -84,11 +84,6 @@ h1 {
   border-radius: var(--bs-card-border-radius); /* Match card's border-radius */
   background-color: rgba(60, 11, 16, 0.304); /* Semi-transparent red overlay */
   pointer-events: none;
-}
-
-.Default-cards {
-    background-color: #fff;
-    color: rgb(0, 89, 255);
 }
 
 .prompt-banner {
@@ -111,4 +106,44 @@ button {
 .disabled-link {
     pointer-events: none; /* Prevent click events */
     cursor: not-allowed !important; /* Change cursor */
+}
+
+/* Dark Mode Styles */
+body.dark-mode {
+    background-color: #121212;
+    color: #e0e0e0;
+}
+
+.dark-mode .prompt-banner,
+.dark-mode .bg-light {
+    background-color: #3c4043 !important; /* Lighter 'charcoal' background */
+    border: 1px solid #4f5357; /* Subtle border for definition */
+}
+
+.dark-mode .text-dark {
+    color: #e0e0e0 !important;
+}
+
+.dark-mode hr {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dark-mode .Answer-cards {
+    background-color: #fff; /* Stark white */
+    color: #000; /* Black text */
+    border-color: #fff; /* White border to match background */
+}
+
+.dark-mode .border-bottom {
+    border-bottom-color: #4f5357 !important;
+}
+
+.dark-mode .form-check-input {
+    background-color: #444;
+    border-color: #666;
+}
+
+.dark-mode .form-check-input:checked {
+    background-color: #326ce5;
+    border-color: #326ce5;
 }
