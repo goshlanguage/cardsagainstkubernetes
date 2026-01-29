@@ -25,6 +25,7 @@ function App() {
     setRound({ ...ROUNDS[currentRoundIndex], answers: shuffledAnswers });
   }, [currentRoundIndex]);
 
+
   const handleSelectAnswer = (answerId) => {
     // Allow selection only during the 'playing' state
     if (gameState === 'playing') {
@@ -39,6 +40,13 @@ function App() {
     setIsCorrect(correct);
     setGameState('submitted');
   };
+
+  const handleNextRound = () => {
+    setGameState('playing');
+    setSelectedAnswerId(null);
+    setIsCorrect(null);
+    setCurrentRoundIndex(prevIndex => (prevIndex + 1) % ROUNDS.length);
+  }
 
   const playerHandRendered = round.answers.map((answer) => (
     <Answer
@@ -61,15 +69,27 @@ function App() {
             <Prompt text={round.prompt.text} />
           </Row>
 
+          <hr />
+
           <div className="d-grid gap-2">
-            <Button
-              variant="primary"
-              size="lg"
-              onClick={handleSubmit}
-              disabled={gameState !== 'playing' || selectedAnswerId === null}
-            >
-              Submit Answer
-            </Button>
+            {gameState === 'playing' ? (
+              <Button
+                variant="primary"
+                size="lg"
+                onClick={handleSubmit}
+                disabled={selectedAnswerId === null}
+              >
+                Submit Answer
+              </Button>
+            ) : (
+              <Button
+                variant={isCorrect ? "success" : "danger"}
+                size="lg"
+                onClick={handleNextRound}
+              >
+                Next Round
+              </Button>
+            )}
           </div>
 
           <br />
