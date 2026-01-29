@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import './App.css';
-import { ROUNDS } from './gameData'; // Import the new data structure
+import { gameData } from './gameData'; // Import the new data structure
 import Answer from './components/Answer'; // Import the generic Answer component
 import Prompt from './components/Prompt'; // Import the generic Prompt component
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -12,18 +12,26 @@ import Header from './components/Header';
 import Row from 'react-bootstrap/Row';
 
 function App() {
+  const [currentDeck, setCurrentDeck] = useState('KCNA');
   const [currentRoundIndex, setCurrentRoundIndex] = useState(0);
-  const [round, setRound] = useState(ROUNDS[currentRoundIndex]);
+  const [round, setRound] = useState(
+    gameData.decks[currentDeck].rounds[currentRoundIndex]
+  );
   const [gameState, setGameState] = useState('playing'); // playing | submitted
   const [selectedAnswerId, setSelectedAnswerId] = useState(null);
   const [isCorrect, setIsCorrect] = useState(null); // boolean | null
-  
+
   // Dark Mode State
   const [isDarkMode, setIsDarkMode] = useState(() => {
     // Initialize state from localStorage or default to false
     const savedMode = localStorage.getItem('darkMode');
     return savedMode ? JSON.parse(savedMode) : false;
   });
+
+  const handleDeckChange = (deckName) => {
+    setCurrentDeck(deckName);
+    setCurrentRoundIndex(0); // Reset round index when deck changes
+  };
 
   // Effect to apply the class and save to localStorage
   useEffect(() => {
@@ -39,17 +47,26 @@ function App() {
 
   // Shuffle answers whenever a new round begins
   useEffect(() => {
-    // Make a copy to avoid mutating the original data
-    const shuffledAnswers = [...ROUNDS[currentRoundIndex].answers];
-    shuffle(shuffledAnswers);
-    setRound({ ...ROUNDS[currentRoundIndex], answers: shuffledAnswers });
-  }, [currentRoundIndex]);
+    const currentAnswers = gameData.decks[currentDeck].answers;
+    const currentRoundData =
+      gameData.decks[currentDeck].rounds[currentRoundIndex];
 
+    // Map answer keys to full answer objects
+    const answers = currentRoundData.answers.map(
+      (answerKey) => currentAnswers[answerKey]
+    );
+
+    // Make a copy to avoid mutating the original data
+    const shuffledAnswers = [...answers];
+    shuffle(shuffledAnswers);
+
+    setRound({ ...currentRoundData, answers: shuffledAnswers });
+  }, [currentRoundIndex, currentDeck]);
 
   const handleSelectAnswer = (answerId) => {
     // Allow selection only during the 'playing' state
     if (gameState === 'playing') {
-      setSelectedAnswerId(prevId => prevId === answerId ? null : answerId);
+      setSelectedAnswerId((prevId) => (prevId === answerId ? null : answerId));
     }
   };
 
@@ -65,8 +82,11 @@ function App() {
     setGameState('playing');
     setSelectedAnswerId(null);
     setIsCorrect(null);
-    setCurrentRoundIndex(prevIndex => (prevIndex + 1) % ROUNDS.length);
-  }
+    setCurrentRoundIndex(
+      (prevIndex) =>
+        (prevIndex + 1) % gameData.decks[currentDeck].rounds.length
+    );
+  };
 
   const playerHandRendered = round.answers.map((answer) => (
     <Answer
@@ -82,7 +102,11 @@ function App() {
 
   return (
     <Container className="py-3">
-      <Header isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} />
+      <Header
+        isDarkMode={isDarkMode}
+        toggleDarkMode={toggleDarkMode}
+        handleDeckChange={handleDeckChange}
+      />
       <main>
         <Container className="p-3 prompt-banner bg-light rounded-3">
           <Row className="row mb-3 justify-content-center align-items-center">
@@ -101,7 +125,7 @@ function App() {
               </Button>
             ) : (
               <Button
-                variant={isCorrect ? "success" : "danger"}
+                variant={isCorrect ? 'success' : 'danger'}
                 size="lg"
                 onClick={handleNextRound}
               >
@@ -111,14 +135,16 @@ function App() {
           </div>
 
           <br />
-            <Row className={`answer-card-container ${gameState}`}>
-              {playerHandRendered}
-            </Row>
+          <Row className={`answer-card-container ${gameState}`}>
+            {playerHandRendered}
+          </Row>
         </Container>
 
         <hr />
         <Row className="justify-content-center footer-link">
-            <a href="https://github.com/goshlanguage/cardsagainstkubernetes"><FontAwesomeIcon icon={faGithub} /></a>
+          <a href="https://github.com/goshlanguage/cardsagainstkubernetes">
+            <FontAwesomeIcon icon={faGithub} />
+          </a>
         </Row>
       </main>
     </Container>
@@ -128,7 +154,8 @@ function App() {
 // unbiased shuffle algorithm (Fisher-Yates aka Knuth shuffle)
 //    https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle
 function shuffle(array) {
-  let currentIndex = array.length, randomIndex;
+  let currentIndex = array.length,
+    randomIndex;
 
   // While there remain elements to shuffle.
   while (currentIndex != 0) {
