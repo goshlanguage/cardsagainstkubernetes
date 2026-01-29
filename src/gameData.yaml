@@ -1,0 +1,646 @@
+studyGuides:
+  kubernetes-fundamentals:
+    title: Kubernetes Fundamentals
+    tip: Focus on core concepts like pods, services, deployments, and the role of control
+      plane components like etcd and the API server.
+    link: https://kubernetes.io/docs/concepts/
+  cloud-native-architecture:
+    title: Cloud Native Architecture
+    tip: Understand the core principles that define cloud-native applications, such
+      as microservices and immutable infrastructure.
+    link: https://www.cncf.io/blog/2018/08/29/the-cloud-native-trail-map/
+  container-orchestration:
+    title: Container Orchestration
+    tip: Review the role of container runtimes (like containerd) and how they interact
+      with Kubernetes via the CRI.
+    link: https://kubernetes.io/docs/concepts/overview/components/#container-runtime
+  cloud-native-application-delivery:
+    title: Cloud Native Application Delivery
+    tip: Study how applications are deployed and managed in Kubernetes, including
+      Deployments and configuration management with ConfigMaps.
+    link: https://kubernetes.io/docs/concepts/workloads/controllers/deployment/
+  cloud-native-ecosystem:
+    title: Cloud Native Ecosystem
+    tip: Familiarize yourself with the major projects in the CNCF landscape and their
+      functions, such as Prometheus for monitoring.
+    link: https://landscape.cncf.io/
+  vulnerability-scanning:
+    title: Vulnerability Scanning
+    tip: Understand the importance of scanning container images for known vulnerabilities
+      using tools like Trivy.
+    link: https://github.com/aquasecurity/trivy
+  runtime-security:
+    title: Runtime Security
+    tip: Learn about tools like Falco that monitor for unexpected application behavior
+      and threats at runtime.
+    link: https://falco.org/docs/
+  network-security:
+    title: Network Security
+    tip: Focus on how to secure network traffic between pods using NetworkPolicies.
+    link: https://kubernetes.io/docs/concepts/services-networking/network-policies/
+  policy-enforcement:
+    title: Policy Enforcement
+    tip: Study how admission controllers and policy engines like Kyverno can be
+      used to enforce rules and best practices.
+    link: https://kyverno.io/docs/
+  security-fundamentals:
+    title: Security Fundamentals
+    tip: Review core Kubernetes security concepts like Role-Based Access Control
+      (RBAC) to control who can do what in the cluster.
+    link: https://kubernetes.io/docs/reference/access-authn-authz/rbac/
+decks:
+  KCNA:
+    answers:
+      CORRECT_PILLARS:
+        id: correct_pillars
+        title: The Four Pillars
+        lines:
+          - Containers
+          - Microservices
+          - Service Mesh
+          - Immutable Infrastructure
+      FOUR_CS:
+        id: four_cs
+        title: The 4 C's of
+        titlealt: Cloud Native Security
+        lines:
+          - Cloud
+          - Cluster
+          - Container
+          - Code
+      GOLDEN_SIGNALS:
+        id: golden_signals
+        title: The Four
+        titlealt: Golden Signals
+        lines:
+          - Latency
+          - Traffic
+          - Errors
+          - Saturation
+      CIS_BENCHMARK:
+        id: cis_benchmark
+        title: CIS Kubernetes
+        titlealt: Benchmark
+        lines:
+          - Control Plane
+          - Worker Nodes
+          - etcd
+          - Policies
+      ANTI_PILLARS:
+        id: anti_pillars
+        title: The 'Anti'-Pillars
+        lines:
+          - Virtual Machines
+          - Monoliths
+          - FTP
+          - Snowflake Servers
+      KUBECTL_GET_PODS:
+        id: q1_correct
+        lines:
+          - kubectl get pods
+      KUBECTL_LIST_PODS:
+        id: q1_decoy1
+        lines:
+          - kubectl list pods
+      KUBECTL_SHOW_PODS:
+        id: q1_decoy2
+        lines:
+          - kubectl show pods
+      KUBECTL_PODS:
+        id: q1_decoy3
+        lines:
+          - kubectl pods
+      KUBECTL_GET_PO:
+        id: q1_decoy4
+        lines:
+          - kubectl get po
+      KUBECTL_DISPLAY_PODS:
+        id: q1_decoy5
+        lines:
+          - kubectl display pods
+      KUBE_API_SERVER:
+        id: q2_correct
+        lines:
+          - kube-apiserver
+      KUBELET:
+        id: q2_decoy1
+        lines:
+          - kubelet
+      CONTAINERD_RUNTIME:
+        id: q2_decoy2
+        lines:
+          - containerd
+      DOCKER_DECOR:
+        id: q2_decoy3
+        lines:
+          - docker
+      ETCD:
+        id: q2_decoy4
+        lines:
+          - etcd
+      KUBE_PROXY:
+        id: q2_decoy5
+        lines:
+          - kube-proxy
+      INGRESS_CONTROLLER:
+        id: q2_decoy6
+        lines:
+          - Ingress Controller
+      SERVICE_STABLE_ENDPOINT:
+        id: q3_correct
+        lines:
+          - Provide a stable network endpoint for a set of pods
+      SERVICE_RESTART_PODS:
+        id: q3_decoy1
+        lines:
+          - Restart pods that have crashed
+      SERVICE_RESOURCE_LIMITS:
+        id: q3_decoy2
+        lines:
+          - Define resource limits for pods
+      SERVICE_PACKAGE_APP:
+        id: q3_decoy3
+        lines:
+          - Package an application and its dependencies
+      SERVICE_INGRESS:
+        id: q3_decoy4
+        lines:
+          - Provide ingress for external traffic
+      SERVICE_LOAD_BALANCE:
+        id: q3_decoy5
+        lines:
+          - Load balance traffic between nodes
+      ETCD_STORE_STATE:
+        id: q4_correct
+        lines:
+          - Store the cluster's state and configuration
+      ETCD_RUN_CONTAINERS:
+        id: q4_decoy1
+        lines:
+          - Run containers on worker nodes
+      ETCD_SCHEDULE_PODS:
+        id: q4_decoy2
+        lines:
+          - Schedule pods onto nodes
+      ETCD_PROVIDE_MESH:
+        id: q4_decoy3
+        lines:
+          - Provide a service mesh for pods
+      ETCD_BACKUP_STATE:
+        id: q4_decoy4
+        lines:
+          - Backup the cluster state
+      ETCD_AUTHENTICATE:
+        id: q4_decoy5
+        lines:
+          - Authenticate users
+      PROMETHEUS:
+        id: q5_correct
+        lines:
+          - Prometheus
+      ARGO:
+        id: q5_decoy1
+        lines:
+          - Argo
+      HELM:
+        id: q5_decoy2
+        lines:
+          - Helm
+      FALCO:
+        id: q5_decoy3
+        lines:
+          - Falco
+      KUBERNETES:
+        id: q5_decoy4
+        lines:
+          - Kubernetes
+      ENVOY:
+        id: q5_decoy5
+        lines:
+          - Envoy
+      CRI_CONTAINERD:
+        id: q6_correct
+        lines:
+          - containerd
+      CRI_DOCKER:
+        id: q6_decoy1
+        lines:
+          - Docker
+      CRI_RKT:
+        id: q6_decoy2
+        lines:
+          - rkt
+      CRI_LXC:
+        id: q6_decoy3
+        lines:
+          - LXC
+      CRIO:
+        id: q6_decoy4
+        lines:
+          - CRI-O
+      RUNV:
+        id: q6_decoy5
+        lines:
+          - runV
+      CONFIGMAP_DECOUPLE:
+        id: q7_correct
+        lines:
+          - To decouple configuration artifacts from container images
+      CONFIGMAP_SECRETS:
+        id: q7_decoy1
+        lines:
+          - To store sensitive information like passwords
+      CONFIGMAP_STORAGE:
+        id: q7_decoy2
+        lines:
+          - To define persistent storage for a pod
+      CONFIGMAP_DESIRED_STATE:
+        id: q7_decoy3
+        lines:
+          - To define the desired state of a deployment
+      CONFIGMAP_INJECT_SIDECAR:
+        id: q7_decoy4
+        lines:
+          - To inject a sidecar container
+      CONFIGMAP_DEFINE_NETWORK:
+        id: q7_decoy5
+        lines:
+          - To define network policies
+      POD_UNIT:
+        id: q8_correct
+        lines:
+          - Pod
+      CONTAINER_UNIT:
+        id: q8_decoy1
+        lines:
+          - Container
+      NODE_UNIT:
+        id: q8_decoy2
+        lines:
+          - Node
+      DEPLOYMENT_UNIT:
+        id: q8_decoy3
+        lines:
+          - Deployment
+      SERVICE_UNIT:
+        id: q8_decoy4
+        lines:
+          - Service
+      REPLICASET_UNIT:
+        id: q8_decoy5
+        lines:
+          - ReplicaSet
+      ROLLING_UPDATE:
+        id: q9_correct
+        lines:
+          - It triggers a rolling update to the pods
+      DELETE_ALL_PODS:
+        id: q9_decoy1
+        lines:
+          - It deletes all old pods at once and creates new ones
+      MANUAL_RESTART:
+        id: q9_decoy2
+        lines:
+          - It requires a manual restart of the cluster
+      AUTO_SCALE_UP:
+        id: q9_decoy3
+        lines:
+          - It automatically scales the number of pods up
+      BLUE_GREEN:
+        id: q9_decoy4
+        lines:
+          - It performs a blue-green deployment
+      CANARY:
+        id: q9_decoy5
+        lines:
+          - It performs a canary release
+      INGRESS_OBJECT:
+        id: q10_correct
+        lines:
+          - Ingress
+      SERVICE_OBJECT:
+        id: q10_decoy1
+        lines:
+          - Service
+      NETWORK_POLICY:
+        id: q10_decoy2
+        lines:
+          - NetworkPolicy
+      ENDPOINT_SLICE:
+        id: q10_decoy3
+        lines:
+          - EndpointSlice
+      NODEPORT:
+        id: q10_decoy4
+        lines:
+          - NodePort
+      LOADBALANCER:
+        id: q10_decoy5
+        lines:
+          - LoadBalancer
+    rounds:
+      - prompt:
+          text: What are the four pillars of the Cloud Native Computing Foundation (CNCF)
+            definition of 'Cloud Native'
+        tag: cloud-native-architecture
+        answers:
+          - CORRECT_PILLARS
+          - FOUR_CS
+          - GOLDEN_SIGNALS
+          - CIS_BENCHMARK
+          - ANTI_PILLARS
+        correctAnswerId: correct_pillars
+      - prompt:
+          text: Which command is used to list all pods in the default namespace?
+        tag: kubernetes-fundamentals
+        answers:
+          - KUBECTL_GET_PODS
+          - KUBECTL_LIST_PODS
+          - KUBECTL_SHOW_PODS
+          - KUBECTL_PODS
+          - KUBECTL_GET_PO
+          - KUBECTL_DISPLAY_PODS
+        correctAnswerId: q1_correct
+      - prompt:
+          text: Which of these is a core component of the Kubernetes control plane?
+        tag: kubernetes-fundamentals
+        answers:
+          - KUBE_API_SERVER
+          - KUBELET
+          - CONTAINERD_RUNTIME
+          - DOCKER_DECOR
+          - INGRESS_CONTROLLER
+          - KUBE_PROXY
+        correctAnswerId: q2_correct
+      - prompt:
+          text: What is the primary purpose of a Kubernetes Service?
+        tag: kubernetes-fundamentals
+        answers:
+          - SERVICE_STABLE_ENDPOINT
+          - SERVICE_RESTART_PODS
+          - SERVICE_RESOURCE_LIMITS
+          - SERVICE_PACKAGE_APP
+          - SERVICE_INGRESS
+          - SERVICE_LOAD_BALANCE
+        correctAnswerId: q3_correct
+      - prompt:
+          text: What is the role of etcd in a Kubernetes cluster?
+        tag: kubernetes-fundamentals
+        answers:
+          - ETCD_STORE_STATE
+          - ETCD_RUN_CONTAINERS
+          - ETCD_SCHEDULE_PODS
+          - ETCD_PROVIDE_MESH
+          - ETCD_BACKUP_STATE
+          - ETCD_AUTHENTICATE
+        correctAnswerId: q4_correct
+      - prompt:
+          text: Which of the following is a 'Graduated' CNCF project?
+        tag: cloud-native-ecosystem
+        answers:
+          - PROMETHEUS
+          - ARGO
+          - HELM
+          - FALCO
+          - KUBERNETES
+          - ENVOY
+        correctAnswerId: q5_correct
+      - prompt:
+          text: Which of the following is a CRI-compliant container runtime?
+        tag: container-orchestration
+        answers:
+          - CRI_CONTAINERD
+          - CRI_DOCKER
+          - CRI_RKT
+          - CRI_LXC
+          - RUNV
+        correctAnswerId: q6_correct
+      - prompt:
+          text: How are ConfigMaps typically used in Kubernetes?
+        tag: cloud-native-application-delivery
+        answers:
+          - CONFIGMAP_DECOUPLE
+          - CONFIGMAP_SECRETS
+          - CONFIGMAP_STORAGE
+          - CONFIGMAP_DESIRED_STATE
+          - CONFIGMAP_INJECT_SIDECAR
+          - CONFIGMAP_DEFINE_NETWORK
+        correctAnswerId: q7_correct
+      - prompt:
+          text: What is the smallest and simplest unit in the Kubernetes object model
+            that you create or deploy?
+        tag: kubernetes-fundamentals
+        answers:
+          - POD_UNIT
+          - CONTAINER_UNIT
+          - NODE_UNIT
+          - DEPLOYMENT_UNIT
+          - SERVICE_UNIT
+          - REPLICASET_UNIT
+        correctAnswerId: q8_correct
+      - prompt:
+          text: What behavior does a standard Kubernetes Deployment trigger when you
+            update its pod template (e.g., container image)?
+        tag: cloud-native-application-delivery
+        answers:
+          - ROLLING_UPDATE
+          - DELETE_ALL_PODS
+          - MANUAL_RESTART
+          - AUTO_SCALE_UP
+          - BLUE_GREEN
+          - CANARY
+        correctAnswerId: q9_correct
+      - prompt:
+          text: Which Kubernetes object provides HTTP routing for services, allowing
+            you to expose them externally?
+        tag: kubernetes-fundamentals
+        answers:
+          - INGRESS_OBJECT
+          - SERVICE_OBJECT
+          - NETWORK_POLICY
+          - ENDPOINT_SLICE
+          - NODEPORT
+          - LOADBALANCER
+        correctAnswerId: q10_correct
+  KCSA:
+    answers:
+      TRIVY_SCAN:
+        id: kcsa_q1_correct
+        lines:
+          - Scan container images for vulnerabilities.
+      TRIVY_DECOY1:
+        id: kcsa_q1_decoy1
+        lines:
+          - Manage network policies.
+      TRIVY_DECOY2:
+        id: kcsa_q1_decoy2
+        lines:
+          - Automate cluster provisioning.
+      TRIVY_DECOY3:
+        id: kcsa_q1_decoy3
+        lines:
+          - Monitor application performance.
+      TRIVY_DECOY4:
+        id: kcsa_q1_decoy4
+        lines:
+          - Enforce security policies.
+      TRIVY_DECOY5:
+        id: kcsa_q1_decoy5
+        lines:
+          - Deploy applications.
+      FALCO_MONITOR:
+        id: kcsa_q2_correct
+        lines:
+          - Falco
+      FALCO_DECOY1:
+        id: kcsa_q2_decoy1
+        lines:
+          - Prometheus
+      FALCO_DECOY2:
+        id: kcsa_q2_decoy2
+        lines:
+          - Grafana
+      FALCO_DECOY3:
+        id: kcsa_q2_decoy3
+        lines:
+          - Kube-router
+      FALCO_DECOY4:
+        id: kcsa_q2_decoy4
+        lines:
+          - Trivy
+      FALCO_DECOY5:
+        id: kcsa_q2_decoy5
+        lines:
+          - Kyverno
+      NETPOL_DENY:
+        id: kcsa_q3_correct
+        lines:
+          - Deny all ingress and egress traffic.
+      NETPOL_DECOY1:
+        id: kcsa_q3_decoy1
+        lines:
+          - Allow all ingress and egress traffic.
+      NETPOL_DECOY2:
+        id: kcsa_q3_decoy2
+        lines:
+          - Allow only ingress traffic.
+      NETPOL_DECOY3:
+        id: kcsa_q3_decoy3
+        lines:
+          - Allow only egress traffic.
+      NETPOL_DECOY4:
+        id: kcsa_q3_decoy4
+        lines:
+          - Deny all traffic within the namespace.
+      NETPOL_DECOY5:
+        id: kcsa_q3_decoy5
+        lines:
+          - Allow traffic from all namespaces.
+      KYVERNO_POLICY:
+        id: kcsa_q4_correct
+        lines:
+          - Kyverno
+      KYVERNO_DECOY1:
+        id: kcsa_q4_decoy1
+        lines:
+          - etcd
+      KYVERNO_DECOY2:
+        id: kcsa_q4_decoy2
+        lines:
+          - CoreDNS
+      KYVERNO_DECOY3:
+        id: kcsa_q4_decoy3
+        lines:
+          - Fluentd
+      KYVERNO_DECOY4:
+        id: kcsa_q4_decoy4
+        lines:
+          - Falco
+      KYVERNO_DECOY5:
+        id: kcsa_q4_decoy5
+        lines:
+          - Trivy
+      RBAC_GRANT:
+        id: kcsa_q5_correct
+        lines:
+          - It grants the permissions defined in a Role or ClusterRole to a user, group,
+            or service account.
+      RBAC_DECOY1:
+        id: kcsa_q5_decoy1
+        lines:
+          - It defines a set of permissions.
+      RBAC_DECOY2:
+        id: kcsa_q5_decoy2
+        lines:
+          - It creates a new user.
+      RBAC_DECOY3:
+        id: kcsa_q5_decoy3
+        lines:
+          - It specifies resource quotas for a namespace.
+      RBAC_DECOY4:
+        id: kcsa_q5_decoy4
+        lines:
+          - It defines a new role.
+      RBAC_DECOY5:
+        id: kcsa_q5_decoy5
+        lines:
+          - It authenticates a user.
+    rounds:
+      - prompt:
+          text: What is the primary function of Trivy in a Kubernetes environment?
+        tag: vulnerability-scanning
+        answers:
+          - TRIVY_SCAN
+          - TRIVY_DECOY1
+          - TRIVY_DECOY2
+          - TRIVY_DECOY3
+          - TRIVY_DECOY4
+          - TRIVY_DECOY5
+        correctAnswerId: kcsa_q1_correct
+      - prompt:
+          text: Which tool is used for runtime security monitoring and threat detection
+            in Kubernetes by analyzing kernel-level events?
+        tag: runtime-security
+        answers:
+          - FALCO_MONITOR
+          - FALCO_DECOY1
+          - FALCO_DECOY2
+          - FALCO_DECOY3
+          - FALCO_DECOY4
+          - FALCO_DECOY5
+        correctAnswerId: kcsa_q2_correct
+      - prompt:
+          text: What is the default behavior of a Kubernetes NetworkPolicy?
+        tag: network-security
+        answers:
+          - NETPOL_DENY
+          - NETPOL_DECOY1
+          - NETPOL_DECOY2
+          - NETPOL_DECOY3
+          - NETPOL_DECOY4
+          - NETPOL_DECOY5
+        correctAnswerId: kcsa_q3_correct
+      - prompt:
+          text: Which tool can be used to enforce policies on Kubernetes resources
+            as they are created or updated, for example to require that all images
+            come from a trusted registry?
+        tag: policy-enforcement
+        answers:
+          - KYVERNO_POLICY
+          - KYVERNO_DECOY1
+          - KYVERNO_DECOY2
+          - KYVERNO_DECOY3
+          - KYVERNO_DECOY4
+          - KYVERNO_DECOY5
+        correctAnswerId: kcsa_q4_correct
+      - prompt:
+          text: In Kubernetes RBAC, what does a RoleBinding or ClusterRoleBinding do?
+        tag: security-fundamentals
+        answers:
+          - RBAC_GRANT
+          - RBAC_DECOY1
+          - RBAC_DECOY2
+          - RBAC_DECOY3
+          - RBAC_DECOY4
+          - RBAC_DECOY5
+        correctAnswerId: kcsa_q5_correct
