@@ -1,5 +1,8 @@
-import { Form } from 'react-bootstrap';
-import kubernetes from '../kubernetes.svg'
+import React from 'react';
+import { Form, Dropdown } from 'react-bootstrap';
+import kubernetes from '../kubernetes.svg';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
 
 const Header = ({ isDarkMode, toggleDarkMode }) => (
     <header>
@@ -16,17 +19,27 @@ const Header = ({ isDarkMode, toggleDarkMode }) => (
                 <a className="me-3 py-2 text-dark text-decoration-none text-muted disabled-link">CKAD</a>
                 <a className="me-3 py-2 text-dark text-decoration-none text-muted disabled-link">CKA</a>
                 <a className="me-3 py-2 text-dark text-decoration-none text-muted disabled-link">CKS</a>
+                
+                <Dropdown align="end">
+                    <Dropdown.Toggle as="a" className="navbar-icon-toggle">
+                        <FontAwesomeIcon icon={faUserCircle} size="lg" />
+                    </Dropdown.Toggle>
 
-               <Form.Check 
-                    type="switch"
-                    id="dark-mode-switch"
-                    label=""
-                    checked={isDarkMode}
-                    onChange={toggleDarkMode}
-                />
+                    <Dropdown.Menu>
+                        <div className="px-3 py-1">
+                            <Form.Check 
+                                type="switch"
+                                id="dark-mode-switch"
+                                label="Dark Mode"
+                                checked={isDarkMode}
+                                onChange={toggleDarkMode}
+                            />
+                        </div>
+                    </Dropdown.Menu>
+                </Dropdown>
             </nav>
         </div>
     </header >
 );
 
-export default Header
+export default Header;

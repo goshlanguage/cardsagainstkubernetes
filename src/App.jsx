@@ -1,14 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import './App.css';
 import { ROUNDS } from './gameData'; // Import the new data structure
 import Answer from './components/Answer'; // Import the generic Answer component
 import Prompt from './components/Prompt'; // Import the generic Prompt component
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faGithub } from '@fortawesome/free-brands-svg-icons';
 
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 import Header from './components/Header';
 import Row from 'react-bootstrap/Row';
-
 
 function App() {
   const [currentRoundIndex, setCurrentRoundIndex] = useState(0);
@@ -114,6 +115,11 @@ function App() {
               {playerHandRendered}
             </Row>
         </Container>
+
+        <hr />
+        <Row className="justify-content-center footer-link">
+            <a href="https://github.com/goshlanguage/cardsagainstkubernetes"><FontAwesomeIcon icon={faGithub} /></a>
+        </Row>
       </main>
     </Container>
   );

@@ -108,6 +108,28 @@ button {
     cursor: not-allowed !important; /* Change cursor */
 }
 
+.navbar-icon-toggle {
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.footer-link {
+    color: inherit;
+    text-decoration: none;
+    text-align: right;
+}
+
+.footer-link a {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.2s ease-in-out;
+}
+
+.footer-link a:hover {
+    color: #326ce5; /* Kubernetes blue on hover */
+}
+
+
 /* Dark Mode Styles */
 body.dark-mode {
     background-color: #121212;
