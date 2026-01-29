@@ -1,14 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import './App.css';
 import { ROUNDS } from './gameData'; // Import the new data structure
 import Answer from './components/Answer'; // Import the generic Answer component
 import Prompt from './components/Prompt'; // Import the generic Prompt component
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faGithub } from '@fortawesome/free-brands-svg-icons';
 
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 import Header from './components/Header';
 import Row from 'react-bootstrap/Row';
-
 
 function App() {
   const [currentRoundIndex, setCurrentRoundIndex] = useState(0);
@@ -16,6 +17,25 @@ function App() {
   const [gameState, setGameState] = useState('playing'); // playing | submitted
   const [selectedAnswerId, setSelectedAnswerId] = useState(null);
   const [isCorrect, setIsCorrect] = useState(null); // boolean | null
+  
+  // Dark Mode State
+  const [isDarkMode, setIsDarkMode] = useState(() => {
+    // Initialize state from localStorage or default to false
+    const savedMode = localStorage.getItem('darkMode');
+    return savedMode ? JSON.parse(savedMode) : false;
+  });
+
+  // Effect to apply the class and save to localStorage
+  useEffect(() => {
+    if (isDarkMode) {
+      document.body.classList.add('dark-mode');
+    } else {
+      document.body.classList.remove('dark-mode');
+    }
+    localStorage.setItem('darkMode', JSON.stringify(isDarkMode));
+  }, [isDarkMode]);
+
+  const toggleDarkMode = () => setIsDarkMode(!isDarkMode);
 
   // Shuffle answers whenever a new round begins
   useEffect(() => {
@@ -62,7 +82,7 @@ function App() {
 
   return (
     <Container className="py-3">
-      <Header />
+      <Header isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} />
       <main>
         <Container className="p-3 prompt-banner bg-light rounded-3">
           <Row className="row mb-3 justify-content-center align-items-center">
@@ -95,6 +115,11 @@ function App() {
               {playerHandRendered}
             </Row>
         </Container>
+
+        <hr />
+        <Row className="justify-content-center footer-link">
+            <a href="https://github.com/goshlanguage/cardsagainstkubernetes"><FontAwesomeIcon icon={faGithub} /></a>
+        </Row>
       </main>
     </Container>
   );
