@@ -36,6 +36,15 @@ h1 {
     box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175) !important;
 }
 
+.Prompt-cards:hover {
+    transform: translateY(0) !important; /* Prevent hover lift for prompt cards */
+}
+
+.selected-card:hover {
+    transform: translateY(-25px) !important; /* Keep the selected position */
+    box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.25) !important; /* Enhance shadow on hover */
+}
+
 .card ::selection {
     background: transparent;
 }
