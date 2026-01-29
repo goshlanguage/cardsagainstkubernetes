@@ -10,8 +10,11 @@ const Header = () => (
             </a>
 
             <nav className="d-inline-flex mt-2 mt-md-0 ms-md-auto">
-                <a className="me-3 py-2 text-dark text-decoration-none" href="#">New</a>
-                <a className="me-3 py-2 text-dark text-decoration-none" href="#">Join</a>
+                <a className="me-3 py-2 text-dark text-decoration-none text-muted disabled-link">KCNA</a>
+                <a className="me-3 py-2 text-dark text-decoration-none text-muted disabled-link">KCSA</a>
+                <a className="me-3 py-2 text-dark text-decoration-none text-muted disabled-link">CKAD</a>
+                <a className="me-3 py-2 text-dark text-decoration-none text-muted disabled-link">CKA</a>
+                <a className="me-3 py-2 text-dark text-decoration-none text-muted disabled-link">CKS</a>
             </nav>
         </div>
     </header >

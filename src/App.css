@@ -20,9 +20,13 @@ h1 {
 
 .card {
     font-family: 'Ubuntu', sans-serif;
-    font-size: 20px;
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 1.3;
     margin: 0.5em;
-        min-height: 15em !important;
+    min-height: 15em !important;
+    border: 2px solid transparent; /* Add transparent border to prevent layout shift */
+    position: relative; /* Needed for pseudo-elements */
 }
 
 .card ::selection {
@@ -33,9 +37,55 @@ h1 {
     background: transparent;
 }
 
-.Adlib-cards {
+.Answer-cards {
+    background-color: #fff;
+    color: #000;
     cursor: grab;
+    transition: all 0.2s ease-in-out;
 }
+
+.selected-card {
+    transform: translateY(-25px);
+    box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175); /* Removed !important */
+}
+
+.fade-out {
+    opacity: 0.2;
+    pointer-events: none;
+    transition: opacity 0.5s ease-out;
+}
+
+.correct {
+    border-color: #28a745;
+    box-shadow: 0 0 15px rgba(40, 167, 69, 0.7); /* Changed to non-important */
+}
+
+/* Specific styling for when the user selects the correct card */
+.correct.selected-card {
+    border-color: #326ce5 !important; /* Kubernetes blue */
+    box-shadow: 0 0 10px rgba(50, 108, 229, 0.6) !important; /* Initial blue glow */
+    animation: breathing-glow 2s ease-in-out infinite;
+}
+
+@keyframes breathing-glow {
+    0% { box-shadow: 0 0 10px rgba(50, 108, 229, 0.6) !important; }
+    50% { box-shadow: 0 0 25px rgba(50, 108, 229, 0.9) !important; }
+    100% { box-shadow: 0 0 10px rgba(50, 108, 229, 0.6) !important; }
+}
+
+
+.wrong::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: var(--bs-card-border-radius); /* Match card's border-radius */
+  background-color: rgba(60, 11, 16, 0.304); /* Semi-transparent red overlay */
+  pointer-events: none;
+}
+
 .Default-cards {
     background-color: #fff;
     color: rgb(0, 89, 255);
@@ -46,8 +96,8 @@ h1 {
 }
 
 .Prompt-cards {
-    background-color: #282c34 !important;
-    color: white;
+    background-color: #000 !important;
+    color: white !important;
 }
 
 button {
@@ -56,4 +106,9 @@ button {
 
 .toast {
     width: 100% !important;
+}
+
+.disabled-link {
+    pointer-events: none; /* Prevent click events */
+    cursor: not-allowed !important; /* Change cursor */
 }

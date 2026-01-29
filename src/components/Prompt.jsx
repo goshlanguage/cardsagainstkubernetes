@@ -27,27 +27,3 @@ function Prompt(props) {
 }
 
 export default Prompt;
-
-export function BossMeetingPrompt() {
-    return (
-        <Prompt text="Boss says they need to meet with you. Something about ____________" />
-    )
-}
-
-export function LostInternPrompt() {
-    return (
-        <Prompt text="We just lost our intern, ____________" />
-    )
-}
-
-export function LegalPrompt() {
-    return (
-        <Prompt text="Uh, Legal said they needed ____________ by next week" />
-    )
-}
-
-export function RetroPrompt() {
-    return (
-        <Prompt text="Your next retrospective will be caused by ____________" />
-    )
-}
