@@ -106,6 +106,7 @@ function App() {
         isDarkMode={isDarkMode}
         toggleDarkMode={toggleDarkMode}
         handleDeckChange={handleDeckChange}
+        currentDeck={currentDeck}
       />
       <main>
         <Container className="p-3 prompt-banner bg-light rounded-3">
@@ -120,6 +121,7 @@ function App() {
                 size="lg"
                 onClick={handleSubmit}
                 disabled={selectedAnswerId === null}
+                className="ubuntu"
               >
                 Submit Answer
               </Button>
@@ -128,6 +130,7 @@ function App() {
                 variant={isCorrect ? 'success' : 'danger'}
                 size="lg"
                 onClick={handleNextRound}
+                className="ubuntu"
               >
                 Next Round
               </Button>
@@ -135,7 +138,7 @@ function App() {
           </div>
 
           <br />
-          <Row className={`answer-card-container ${gameState}`}>
+          <Row className={`answer-card-container mt-4 ${gameState}`}>
             {playerHandRendered}
           </Row>
         </Container>

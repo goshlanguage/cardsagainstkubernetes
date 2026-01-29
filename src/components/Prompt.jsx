@@ -11,7 +11,7 @@ function Prompt(props) {
     return (
         <Col md="3">
             <Card className="Prompt-cards rounded-3 shadow-sm">
-                <Card.Body>
+                <Card.Body className="p-4">
                     <Card.Text>
                         {props.text}
                     </Card.Text>

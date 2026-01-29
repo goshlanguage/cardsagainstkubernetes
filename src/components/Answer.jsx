@@ -37,7 +37,7 @@ function Answer(props) {
   return (
     <Col className={fadeOut ? 'fade-out' : ''}>
       <Card className={getCardClasses()} onClick={props.onSelect}>
-        <Card.Body>
+        <Card.Body className="p-4">
           {showTitle && (
             <Card.Text>
               {props.title}{' '}

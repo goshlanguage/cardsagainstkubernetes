@@ -4,7 +4,7 @@ import kubernetes from '../kubernetes.svg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
 
-const Header = ({ isDarkMode, toggleDarkMode, handleDeckChange }) => (
+const Header = ({ isDarkMode, toggleDarkMode, handleDeckChange, currentDeck }) => (
     <header>
         <div className="d-flex flex-column flex-md-row align-items-center pb-3 mb-4 border-bottom">
             <a href="/" className="d-flex align-items-center text-dark text-decoration-none">
@@ -13,9 +13,8 @@ const Header = ({ isDarkMode, toggleDarkMode, handleDeckChange }) => (
             </a>
 
             <nav className="d-inline-flex mt-2 mt-md-0 ms-md-auto align-items-center">
-                <a className="me-3 py-2 text-dark text-decoration-none" href="#">DEMO</a>
-                <a className="me-3 py-2 text-dark text-decoration-none" href="#" onClick={() => handleDeckChange('KCNA')}>KCNA</a>
-                <a className="me-3 py-2 text-dark text-decoration-none" href="#" onClick={() => handleDeckChange('KCSA')}>KCSA</a>
+                <a className={`me-3 py-2 text-dark text-decoration-none ${currentDeck === 'KCNA' ? 'fw-bold' : ''}`} href="#" onClick={() => handleDeckChange('KCNA')}>KCNA</a>
+                <a className={`me-3 py-2 text-dark text-decoration-none ${currentDeck === 'KCSA' ? 'fw-bold' : ''}`} href="#" onClick={() => handleDeckChange('KCSA')}>KCSA</a>
                 <a className="me-3 py-2 text-dark text-decoration-none text-muted disabled-link">CKAD</a>
                 <a className="me-3 py-2 text-dark text-decoration-none text-muted disabled-link">CKA</a>
                 <a className="me-3 py-2 text-dark text-decoration-none text-muted disabled-link">CKS</a>
