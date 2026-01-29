@@ -69,8 +69,6 @@ function App() {
             <Prompt text={round.prompt.text} />
           </Row>
 
-          <hr />
-
           <div className="d-grid gap-2">
             {gameState === 'playing' ? (
               <Button
