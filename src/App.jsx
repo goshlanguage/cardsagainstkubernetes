@@ -10,30 +10,150 @@ import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 import Header from './components/Header';
 import Row from 'react-bootstrap/Row';
+import Card from 'react-bootstrap/Card';
+import Col from 'react-bootstrap/Col';
+
+// unbiased shuffle algorithm (Fisher-Yates aka Knuth shuffle)
+function shuffle(array) {
+  let currentIndex = array.length, randomIndex;
+
+  // While there remain elements to shuffle.
+  while (currentIndex != 0) {
+    // Pick a remaining element.
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
+
+    // And swap it with the current element.
+    [array[currentIndex], array[randomIndex]] = [
+      array[randomIndex],
+      array[currentIndex],
+    ];
+  }
+
+  return array;
+}
+
+function ScoreScreen({ score, totalQuestions, incorrectAnswers, playAgain }) {
+    const percentage = totalQuestions > 0 ? Math.round((score / totalQuestions) * 100) : 0;
+    
+    // Tally up the tags from incorrect answers
+    const incorrectTags = incorrectAnswers.reduce((acc, round) => {
+        if (round.tag) {
+            acc[round.tag] = (acc[round.tag] || 0) + 1;
+        }
+        return acc;
+    }, {});
+
+    // Get unique tags to show each guide only once
+    const uniqueIncorrectTags = Object.keys(incorrectTags);
+
+    return (
+        <Container className="py-3">
+            <main>
+                <Container className="p-4 prompt-banner bg-light rounded-3 text-center">
+                    <h1 className="display-4">Deck Complete!</h1>
+                    <p className="lead">You scored</p>
+                    <h2 className="display-1">{percentage}%</h2>
+                    <p className="lead mb-4">({score} out of {totalQuestions} correct)</p>
+                    
+                    {uniqueIncorrectTags.length > 0 && (
+                        <>
+                            <hr />
+                            <h3 className="mt-4">Study Guide</h3>
+                            <p>Based on your answers, here are some areas to focus on:</p>
+                            <Row className="justify-content-center">
+                                {uniqueIncorrectTags.map(tag => {
+                                    const guide = gameData.studyGuides[tag];
+                                    if (!guide) return null;
+                                    return (
+                                        <Col md={6} lg={4} key={tag} className="mb-3">
+                                            <Card>
+                                                <Card.Body>
+                                                    <Card.Title>{guide.title}</Card.Title>
+                                                    <Card.Text>{guide.tip}</Card.Text>
+                                                    <Button variant="primary" href={guide.link} target="_blank">Learn More</Button>
+                                                </Card.Body>
+                                            </Card>
+                                        </Col>
+                                    );
+                                })}
+                            </Row>
+                        </>
+                    )}
+
+                    <Button variant="success" size="lg" onClick={playAgain} className="mt-4 ubuntu">
+                        Play Again
+                    </Button>
+                </Container>
+            </main>
+        </Container>
+    );
+}
 
 function App() {
   const [currentDeck, setCurrentDeck] = useState('KCNA');
-  const [currentRoundIndex, setCurrentRoundIndex] = useState(0);
-  const [round, setRound] = useState(
-    gameData.decks[currentDeck].rounds[currentRoundIndex]
-  );
-  const [gameState, setGameState] = useState('playing'); // playing | submitted
+  const [shuffledRounds, setShuffledRounds] = useState([]);
+  const [roundCounter, setRoundCounter] = useState(0);
+  const [round, setRound] = useState(null);
+  const [gameState, setGameState] = useState('playing'); // playing | submitted | finished
   const [selectedAnswerId, setSelectedAnswerId] = useState(null);
   const [isCorrect, setIsCorrect] = useState(null); // boolean | null
+  const [score, setScore] = useState(0);
+  const [incorrectAnswers, setIncorrectAnswers] = useState([]);
 
   // Dark Mode State
   const [isDarkMode, setIsDarkMode] = useState(() => {
-    // Initialize state from localStorage or default to false
     const savedMode = localStorage.getItem('darkMode');
     return savedMode ? JSON.parse(savedMode) : false;
   });
 
-  const handleDeckChange = (deckName) => {
-    setCurrentDeck(deckName);
-    setCurrentRoundIndex(0); // Reset round index when deck changes
+  const setupDeck = (deckName) => {
+    const newRounds = [...gameData.decks[deckName].rounds];
+    shuffle(newRounds);
+    setShuffledRounds(newRounds);
+    setRoundCounter(0);
+    setScore(0);
+    setIncorrectAnswers([]);
+    setGameState('playing');
+    setRound(null); // Explicitly set round to null to show loading state
   };
 
-  // Effect to apply the class and save to localStorage
+  // Effect to setup deck on initial load and when deck changes
+  useEffect(() => {
+    setupDeck(currentDeck);
+  }, [currentDeck]);
+
+  // Effect to set up the current round
+  useEffect(() => {
+    if (shuffledRounds.length > 0 && roundCounter < shuffledRounds.length) {
+      const currentRoundData = shuffledRounds[roundCounter];
+      const allAnswers = gameData.decks[currentDeck].answers;
+      const { correctAnswerId, answers: answerKeys } = currentRoundData;
+
+      const correctAnswerKey = Object.keys(allAnswers).find(key => allAnswers[key].id === correctAnswerId);
+
+      if (!correctAnswerKey) {
+        console.error("Data inconsistency: Could not find the correct answer key for round:", currentRoundData);
+        return;
+      }
+
+      const decoys = answerKeys.filter(key => key !== correctAnswerKey);
+      shuffle(decoys);
+
+      const selectedDecoys = decoys.slice(0, 3);
+      const handKeys = [correctAnswerKey, ...selectedDecoys];
+      shuffle(handKeys);
+
+      const handObjects = handKeys.map(key => allAnswers[key]);
+
+      setRound({ ...currentRoundData, answers: handObjects });
+    }
+  }, [shuffledRounds, roundCounter]); // Removed currentDeck dependency to fix race condition
+
+  const handleDeckChange = (deckName) => {
+    setCurrentDeck(deckName);
+  };
+
   useEffect(() => {
     if (isDarkMode) {
       document.body.classList.add('dark-mode');
@@ -45,48 +165,54 @@ function App() {
 
   const toggleDarkMode = () => setIsDarkMode(!isDarkMode);
 
-  // Shuffle answers whenever a new round begins
-  useEffect(() => {
-    const currentAnswers = gameData.decks[currentDeck].answers;
-    const currentRoundData =
-      gameData.decks[currentDeck].rounds[currentRoundIndex];
-
-    // Map answer keys to full answer objects
-    const answers = currentRoundData.answers.map(
-      (answerKey) => currentAnswers[answerKey]
-    );
-
-    // Make a copy to avoid mutating the original data
-    const shuffledAnswers = [...answers];
-    shuffle(shuffledAnswers);
-
-    setRound({ ...currentRoundData, answers: shuffledAnswers });
-  }, [currentRoundIndex, currentDeck]);
-
   const handleSelectAnswer = (answerId) => {
-    // Allow selection only during the 'playing' state
     if (gameState === 'playing') {
       setSelectedAnswerId((prevId) => (prevId === answerId ? null : answerId));
     }
   };
 
   const handleSubmit = () => {
-    if (selectedAnswerId === null) return; // Don't submit if nothing is selected
+    if (selectedAnswerId === null) return;
 
     const correct = selectedAnswerId === round.correctAnswerId;
+    if (correct) {
+        setScore(prevScore => prevScore + 1);
+    }
+    else {
+        setIncorrectAnswers(prev => [...prev, round]);
+    }
     setIsCorrect(correct);
     setGameState('submitted');
   };
 
   const handleNextRound = () => {
-    setGameState('playing');
-    setSelectedAnswerId(null);
-    setIsCorrect(null);
-    setCurrentRoundIndex(
-      (prevIndex) =>
-        (prevIndex + 1) % gameData.decks[currentDeck].rounds.length
-    );
+    if (roundCounter + 1 < shuffledRounds.length) {
+      setGameState('playing');
+      setSelectedAnswerId(null);
+      setIsCorrect(null);
+      setRoundCounter(prevCounter => prevCounter + 1);
+    }
+    else {
+      setGameState('finished');
+    }
   };
+  
+  if (gameState === 'finished') {
+    return <ScoreScreen 
+        score={score}
+        totalQuestions={shuffledRounds.length}
+        incorrectAnswers={incorrectAnswers}
+        playAgain={() => setupDeck(currentDeck)}
+    />
+  }
+
+  if (!round) {
+    return (
+        <Container className="py-3 text-center">
+            <h1>Loading Deck...</h1>
+        </Container>
+    );
+  }
 
   const playerHandRendered = round.answers.map((answer) => (
     <Answer
@@ -145,7 +271,7 @@ function App() {
 
         <hr />
         <div className="d-flex justify-content-end footer-link">
-          <a href="https://hartje.io" target="_blank">HARTJE.IO</a> <span className="mx-2">|</span>
+          <a href="https://hartje.io" target="_blank">Hartje.io</a> <span className="mx-2">|</span>
           <a href="https://github.com/goshlanguage/cardsagainstkubernetes" target="_blank">
             <FontAwesomeIcon icon={faGithub} />
           </a>
@@ -153,28 +279,6 @@ function App() {
       </main>
     </Container>
   );
-}
-
-// unbiased shuffle algorithm (Fisher-Yates aka Knuth shuffle)
-//    https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle
-function shuffle(array) {
-  let currentIndex = array.length,
-    randomIndex;
-
-  // While there remain elements to shuffle.
-  while (currentIndex != 0) {
-    // Pick a remaining element.
-    randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex--;
-
-    // And swap it with the current element.
-    [array[currentIndex], array[randomIndex]] = [
-      array[randomIndex],
-      array[currentIndex],
-    ];
-  }
-
-  return array;
 }
 
 export default App;
