@@ -145,8 +145,8 @@ function App() {
 
         <hr />
         <div className="d-flex justify-content-end footer-link">
-          <a href="https://hartje.io">HARTJE.IO</a> <span className="mx-2">|</span>
-          <a href="https://github.com/goshlanguage/cardsagainstkubernetes">
+          <a href="https://hartje.io" target="_blank">HARTJE.IO</a> <span className="mx-2">|</span>
+          <a href="https://github.com/goshlanguage/cardsagainstkubernetes" target="_blank">
             <FontAwesomeIcon icon={faGithub} />
           </a>
         </div>
