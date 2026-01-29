@@ -141,11 +141,12 @@ function App() {
         </Container>
 
         <hr />
-        <Row className="justify-content-center footer-link">
+        <div className="d-flex justify-content-end footer-link">
+          <a href="https://hartje.io">HARTJE.IO</a> <span className="mx-2">|</span>
           <a href="https://github.com/goshlanguage/cardsagainstkubernetes">
             <FontAwesomeIcon icon={faGithub} />
           </a>
-        </Row>
+        </div>
       </main>
     </Container>
   );
