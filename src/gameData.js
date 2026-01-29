@@ -312,7 +312,7 @@ export const gameData = {
             text: 'Which of the following is a CRI-compliant container runtime?',
           },
           tag: 'container-orchestration',
-          answers: ['CRI_CONTAINERD', 'CRI_DOCKER', 'CRI_RKT', 'CRI_LXC', 'CRIO', 'RUNV'],
+          answers: ['CRI_CONTAINERD', 'CRI_DOCKER', 'CRI_RKT', 'CRI_LXC', 'RUNV'],
           correctAnswerId: 'q6_correct',
         },
         {
