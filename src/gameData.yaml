@@ -8,7 +8,7 @@ studyGuides:
     title: Cloud Native Architecture
     tip: Understand the core principles that define cloud-native applications, such
       as microservices and immutable infrastructure.
-    link: https://www.cncf.io/blog/2018/08/29/the-cloud-native-trail-map/
+    link: https://www.cncf.io/blog/2018/03/08/introducing-the-cloud-native-landscape-2-0-interactive-edition/
   container-orchestration:
     title: Container Orchestration
     tip: Review the role of container runtimes (like containerd) and how they interact
@@ -51,8 +51,8 @@ studyGuides:
 decks:
   KCNA:
     answers:
-      CORRECT_PILLARS:
-        id: correct_pillars
+      FOUR_PILLARS:
+        id: four_pillars
         title: The Four Pillars
         lines:
           - Containers
@@ -95,25 +95,21 @@ decks:
           - FTP
           - Snowflake Servers
       KUBECTL_GET_PODS:
-        id: q1_correct
+        id: k_get_pods
         lines:
           - kubectl get pods
       KUBECTL_LIST_PODS:
-        id: q1_decoy1
+        id: k_list_pods
         lines:
           - kubectl list pods
       KUBECTL_SHOW_PODS:
-        id: q1_decoy2
+        id: k_show_pods
         lines:
           - kubectl show pods
       KUBECTL_PODS:
-        id: q1_decoy3
+        id: k_pods
         lines:
           - kubectl pods
-      KUBECTL_GET_PO:
-        id: q1_decoy4
-        lines:
-          - kubectl get po
       KUBECTL_DISPLAY_PODS:
         id: q1_decoy5
         lines:
@@ -130,18 +126,18 @@ decks:
         id: q2_decoy2
         lines:
           - containerd
-      DOCKER_DECOR:
-        id: q2_decoy3
+      DOCKER:
+        id: docker
         lines:
           - docker
       ETCD:
         id: q2_decoy4
         lines:
           - etcd
-      KUBE_PROXY:
-        id: q2_decoy5
+      METRICS_SERVER:
+        id: metrics_server
         lines:
-          - kube-proxy
+          - metrics-server
       INGRESS_CONTROLLER:
         id: q2_decoy6
         lines:
@@ -198,34 +194,30 @@ decks:
         id: q5_correct
         lines:
           - Prometheus
-      ARGO:
-        id: q5_decoy1
+      OPERATOR_FRAMEWORK:
+        id: operator_framework
         lines:
-          - Argo
-      HELM:
-        id: q5_decoy2
+          - Operator Framework
+      BACKSTAGE:
+        id: backstage
         lines:
-          - Helm
-      FALCO:
-        id: q5_decoy3
+          - Backstage
+      SPINNAKER:
+        id: spinnaker
         lines:
-          - Falco
-      KUBERNETES:
-        id: q5_decoy4
+          - Spinnaker
+      NATS:
+        id: nats
         lines:
-          - Kubernetes
-      ENVOY:
-        id: q5_decoy5
+          - NATS
+      KYVERNO:
+        id: kyverno
         lines:
-          - Envoy
+          - Kyverno
       CRI_CONTAINERD:
         id: q6_correct
         lines:
           - containerd
-      CRI_DOCKER:
-        id: q6_decoy1
-        lines:
-          - Docker
       CRI_RKT:
         id: q6_decoy2
         lines:
@@ -344,12 +336,12 @@ decks:
             definition of 'Cloud Native'
         tag: cloud-native-architecture
         answers:
-          - CORRECT_PILLARS
+          - FOUR_PILLARS
           - FOUR_CS
           - GOLDEN_SIGNALS
           - CIS_BENCHMARK
           - ANTI_PILLARS
-        correctAnswerId: correct_pillars
+        correctAnswerId: four_pillars
       - prompt:
           text: Which command is used to list all pods in the default namespace?
         tag: kubernetes-fundamentals
@@ -358,9 +350,8 @@ decks:
           - KUBECTL_LIST_PODS
           - KUBECTL_SHOW_PODS
           - KUBECTL_PODS
-          - KUBECTL_GET_PO
           - KUBECTL_DISPLAY_PODS
-        correctAnswerId: q1_correct
+        correctAnswerId: k_get_pods
       - prompt:
           text: Which of these is a core component of the Kubernetes control plane?
         tag: kubernetes-fundamentals
@@ -368,9 +359,9 @@ decks:
           - KUBE_API_SERVER
           - KUBELET
           - CONTAINERD_RUNTIME
-          - DOCKER_DECOR
+          - DOCKER
           - INGRESS_CONTROLLER
-          - KUBE_PROXY
+          - METRICS_SERVER
         correctAnswerId: q2_correct
       - prompt:
           text: What is the primary purpose of a Kubernetes Service?
@@ -399,18 +390,18 @@ decks:
         tag: cloud-native-ecosystem
         answers:
           - PROMETHEUS
-          - ARGO
-          - HELM
-          - FALCO
-          - KUBERNETES
-          - ENVOY
+          - KYVERNO
+          - OPERATOR_FRAMEWORK
+          - BACKSTAGE
+          - SPINNAKER
+          - NATS
         correctAnswerId: q5_correct
       - prompt:
           text: Which of the following is a CRI-compliant container runtime?
         tag: container-orchestration
         answers:
           - CRI_CONTAINERD
-          - CRI_DOCKER
+          - DOCKER
           - CRI_RKT
           - CRI_LXC
           - RUNV
