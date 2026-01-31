@@ -194,3 +194,37 @@ body.dark-mode {
     background-color: #326ce5;
     border-color: #326ce5;
 }
+
+.score-screen-container .card:hover {
+    transform: none;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important; /* Revert to default shadow */
+}
+
+@keyframes prompt-correct-flash {
+  0% {
+    box-shadow: 0 0 0 5px rgba(50, 108, 229, 0.7);
+  }
+  50% {
+    box-shadow: 0 0 0 10px rgba(50, 108, 229, 0.3);
+  }
+  100% {
+    box-shadow: 0 0 0 5px rgba(50, 108, 229, 0.0);
+  }
+}
+
+.prompt-correct-flash {
+  animation: prompt-correct-flash 0.5s ease-out;
+}
+
+@keyframes score-flash {
+  0% {
+    text-shadow: 0 0 2px #fff, 0 0 5px #fff, 0 0 10px #326ce5;
+  }
+  100% {
+    text-shadow: none;
+  }
+}
+
+.score-flash {
+  animation: score-flash 1s ease-in-out;
+}
