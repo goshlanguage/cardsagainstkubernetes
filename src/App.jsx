@@ -5,6 +5,8 @@ import Answer from './components/Answer'; // Import the generic Answer component
 import Prompt from './components/Prompt'; // Import the generic Prompt component
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
+import Confetti from 'react-confetti'; // Import Confetti
+import { useWindowSize } from '@react-hook/window-size'; // Import useWindowSize
 
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
@@ -33,8 +35,10 @@ function shuffle(array) {
   return array;
 }
 
-function ScoreScreen({ score, totalQuestions, incorrectAnswers, playAgain }) {
+function ScoreScreen({ score, totalQuestions, incorrectAnswers, playAgain, passingPercentage }) {
+    const { width, height } = useWindowSize();
     const percentage = totalQuestions > 0 ? Math.round((score / totalQuestions) * 100) : 0;
+    const passedExam = percentage >= passingPercentage;
     
     // Tally up the tags from incorrect answers
     const incorrectTags = incorrectAnswers.reduce((acc, round) => {
@@ -49,8 +53,9 @@ function ScoreScreen({ score, totalQuestions, incorrectAnswers, playAgain }) {
 
     return (
         <Container className="py-3">
+            {passedExam && <Confetti width={width} height={height} recycle={false} numberOfPieces={200} />}
             <main>
-                <Container className="p-4 prompt-banner bg-light rounded-3 text-center">
+                <Container className="p-4 prompt-banner bg-light rounded-3 text-center score-screen-container">
                     <h1 className="display-4">Deck Complete!</h1>
                     <p className="lead">You scored</p>
                     <h2 className="display-1">{percentage}%</h2>
@@ -100,6 +105,7 @@ function App() {
   const [isCorrect, setIsCorrect] = useState(null); // boolean | null
   const [score, setScore] = useState(0);
   const [incorrectAnswers, setIncorrectAnswers] = useState([]);
+  const [correctAnswerFlash, setCorrectAnswerFlash] = useState(false); // State for correct answer fanfare
 
   // Dark Mode State
   const [isDarkMode, setIsDarkMode] = useState(() => {
@@ -150,6 +156,16 @@ function App() {
     }
   }, [shuffledRounds, roundCounter]); // Removed currentDeck dependency to fix race condition
 
+  // Effect for correct answer flash
+  useEffect(() => {
+    if (correctAnswerFlash) {
+      const timer = setTimeout(() => {
+        setCorrectAnswerFlash(false);
+      }, 500); // Flash for 500ms
+      return () => clearTimeout(timer);
+    }
+  }, [correctAnswerFlash]);
+
   const handleDeckChange = (deckName) => {
     setCurrentDeck(deckName);
   };
@@ -177,6 +193,7 @@ function App() {
     const correct = selectedAnswerId === round.correctAnswerId;
     if (correct) {
         setScore(prevScore => prevScore + 1);
+        setCorrectAnswerFlash(true); // Trigger flash on correct answer
     }
     else {
         setIncorrectAnswers(prev => [...prev, round]);
@@ -198,11 +215,13 @@ function App() {
   };
   
   if (gameState === 'finished') {
+    const passingPercentage = gameData.decks[currentDeck]?.passingPercentage || 75;
     return <ScoreScreen 
         score={score}
         totalQuestions={shuffledRounds.length}
         incorrectAnswers={incorrectAnswers}
         playAgain={() => setupDeck(currentDeck)}
+        passingPercentage={passingPercentage}
     />
   }
 
@@ -235,7 +254,7 @@ function App() {
         currentDeck={currentDeck}
       />
       <main>
-        <Container className="p-3 prompt-banner bg-light rounded-3">
+        <Container className={`p-3 prompt-banner bg-light rounded-3 ${correctAnswerFlash ? 'prompt-correct-flash' : ''}`}>
           <Row className="row mb-3 justify-content-center align-items-center">
             <Prompt text={round.prompt.text} />
           </Row>
