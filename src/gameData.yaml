@@ -50,6 +50,7 @@ studyGuides:
     link: https://kubernetes.io/docs/reference/access-authn-authz/rbac/
 decks:
   KCNA:
+    passingPercentage: 75
     answers:
       FOUR_PILLARS:
         id: four_pillars
@@ -454,6 +455,7 @@ decks:
           - LOADBALANCER
         correctAnswerId: q10_correct
   KCSA:
+    passingPercentage: 75
     answers:
       TRIVY_SCAN:
         id: kcsa_q1_correct

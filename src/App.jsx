@@ -35,9 +35,8 @@ function shuffle(array) {
   return array;
 }
 
-function ScoreScreen({ score, totalQuestions, incorrectAnswers, playAgain }) {
+function ScoreScreen({ score, totalQuestions, incorrectAnswers, playAgain, passingPercentage }) {
     const { width, height } = useWindowSize();
-    const passingPercentage = 75; // Define passing score
     const percentage = totalQuestions > 0 ? Math.round((score / totalQuestions) * 100) : 0;
     const passedExam = percentage >= passingPercentage;
     
@@ -216,11 +215,13 @@ function App() {
   };
   
   if (gameState === 'finished') {
+    const passingPercentage = gameData.decks[currentDeck]?.passingPercentage || 75;
     return <ScoreScreen 
         score={score}
         totalQuestions={shuffledRounds.length}
         incorrectAnswers={incorrectAnswers}
         playAgain={() => setupDeck(currentDeck)}
+        passingPercentage={passingPercentage}
     />
   }
 

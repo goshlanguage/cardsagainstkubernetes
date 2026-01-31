@@ -14,7 +14,7 @@ const Header = ({ isDarkMode, toggleDarkMode, handleDeckChange, currentDeck }) =
 
             <nav className="d-inline-flex mt-2 mt-md-0 ms-md-auto align-items-center">
                 <a className={`me-3 py-2 text-dark text-decoration-none ${currentDeck === 'KCNA' ? 'fw-bold' : ''}`} href="#" onClick={() => handleDeckChange('KCNA')}>KCNA</a>
-                <a className={`me-3 py-2 text-dark text-decoration-none ${currentDeck === 'KCSA' ? 'fw-bold' : ''}`} href="#" onClick={() => handleDeckChange('KCSA')}>KCSA</a>                
+                <a className={`me-3 py-2 text-dark text-decoration-none ${currentDeck === 'KCSA' ? 'fw-bold' : ''}`} href="#" onClick={() => handleDeckChange('KCSA')}>KCSA</a>
                 <Dropdown align="end">
                     <Dropdown.Toggle as="a" className="navbar-icon-toggle">
                         <FontAwesomeIcon icon={faUserCircle} size="lg" />
