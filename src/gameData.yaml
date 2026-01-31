@@ -112,19 +112,19 @@ decks:
         lines:
           - kubectl pods
       KUBECTL_DISPLAY_PODS:
-        id: q1_decoy5
+        id: k_display_pods
         lines:
           - kubectl display pods
       KUBE_API_SERVER:
-        id: q2_correct
+        id: kube_api_server
         lines:
           - kube-apiserver
       KUBELET:
-        id: q2_decoy1
+        id: kubelet
         lines:
           - kubelet
       CONTAINERD_RUNTIME:
-        id: q2_decoy2
+        id: containerd_runtime
         lines:
           - containerd
       DOCKER:
@@ -132,7 +132,7 @@ decks:
         lines:
           - docker
       ETCD:
-        id: q2_decoy4
+        id: etcd_component
         lines:
           - etcd
       METRICS_SERVER:
@@ -140,59 +140,59 @@ decks:
         lines:
           - metrics-server
       INGRESS_CONTROLLER:
-        id: q2_decoy6
+        id: ingress_controller
         lines:
           - Ingress Controller
       SERVICE_STABLE_ENDPOINT:
-        id: q3_correct
+        id: service_stable_endpoint
         lines:
           - Provide a stable network endpoint for a set of pods
       SERVICE_RESTART_PODS:
-        id: q3_decoy1
+        id: service_restart_pods
         lines:
           - Restart pods that have crashed
       SERVICE_RESOURCE_LIMITS:
-        id: q3_decoy2
+        id: service_resource_limits
         lines:
           - Define resource limits for pods
       SERVICE_PACKAGE_APP:
-        id: q3_decoy3
+        id: service_package_app
         lines:
           - Package an application and its dependencies
       SERVICE_INGRESS:
-        id: q3_decoy4
+        id: service_ingress
         lines:
           - Provide ingress for external traffic
       SERVICE_LOAD_BALANCE:
-        id: q3_decoy5
+        id: service_load_balance
         lines:
           - Load balance traffic between nodes
       ETCD_STORE_STATE:
-        id: q4_correct
+        id: etcd_store_state
         lines:
           - Store the cluster's state and configuration
       ETCD_RUN_CONTAINERS:
-        id: q4_decoy1
+        id: etcd_run_containers
         lines:
           - Run containers on worker nodes
       ETCD_SCHEDULE_PODS:
-        id: q4_decoy2
+        id: etcd_schedule_pods
         lines:
           - Schedule pods onto nodes
       ETCD_PROVIDE_MESH:
-        id: q4_decoy3
+        id: etcd_provide_mesh
         lines:
           - Provide a service mesh for pods
       ETCD_BACKUP_STATE:
-        id: q4_decoy4
+        id: etcd_backup_state
         lines:
           - Backup the cluster state
       ETCD_AUTHENTICATE:
-        id: q4_decoy5
+        id: etcd_authenticate
         lines:
           - Authenticate users
       PROMETHEUS:
-        id: q5_correct
+        id: prometheus
         lines:
           - Prometheus
       OPERATOR_FRAMEWORK:
@@ -216,125 +216,456 @@ decks:
         lines:
           - Kyverno
       CRI_CONTAINERD:
-        id: q6_correct
+        id: cri_containerd
         lines:
           - containerd
       CRI_RKT:
-        id: q6_decoy2
+        id: cri_rkt
         lines:
           - rkt
       CRI_LXC:
-        id: q6_decoy3
+        id: cri_lxc
         lines:
           - LXC
       CRIO:
-        id: q6_decoy4
+        id: cri_o
         lines:
           - CRI-O
       RUNV:
-        id: q6_decoy5
+        id: runv
         lines:
           - runV
       CONFIGMAP_DECOUPLE:
-        id: q7_correct
+        id: configmap_decouple
         lines:
           - To decouple configuration artifacts from container images
       CONFIGMAP_SECRETS:
-        id: q7_decoy1
+        id: configmap_secrets
         lines:
           - To store sensitive information like passwords
       CONFIGMAP_STORAGE:
-        id: q7_decoy2
+        id: configmap_storage
         lines:
           - To define persistent storage for a pod
       CONFIGMAP_DESIRED_STATE:
-        id: q7_decoy3
+        id: configmap_desired_state
         lines:
           - To define the desired state of a deployment
       CONFIGMAP_INJECT_SIDECAR:
-        id: q7_decoy4
+        id: configmap_inject_sidecar
         lines:
           - To inject a sidecar container
       CONFIGMAP_DEFINE_NETWORK:
-        id: q7_decoy5
+        id: configmap_define_network
         lines:
           - To define network policies
       POD_UNIT:
-        id: q8_correct
+        id: pod_unit
         lines:
           - Pod
       CONTAINER_UNIT:
-        id: q8_decoy1
+        id: container_unit
         lines:
           - Container
       NODE_UNIT:
-        id: q8_decoy2
+        id: node_unit
         lines:
           - Node
       DEPLOYMENT_UNIT:
-        id: q8_decoy3
+        id: deployment_unit
         lines:
           - Deployment
       SERVICE_UNIT:
-        id: q8_decoy4
+        id: service_unit
         lines:
           - Service
       REPLICASET_UNIT:
-        id: q8_decoy5
+        id: replicaset_unit
         lines:
           - ReplicaSet
       ROLLING_UPDATE:
-        id: q9_correct
+        id: rolling_update
         lines:
           - It triggers a rolling update to the pods
       DELETE_ALL_PODS:
-        id: q9_decoy1
+        id: delete_all_pods
         lines:
           - It deletes all old pods at once and creates new ones
       MANUAL_RESTART:
-        id: q9_decoy2
+        id: manual_restart
         lines:
           - It requires a manual restart of the cluster
       AUTO_SCALE_UP:
-        id: q9_decoy3
+        id: auto_scale_up
         lines:
           - It automatically scales the number of pods up
       BLUE_GREEN:
-        id: q9_decoy4
+        id: blue_green
         lines:
           - It performs a blue-green deployment
       CANARY:
-        id: q9_decoy5
+        id: canary
         lines:
           - It performs a canary release
       INGRESS_OBJECT:
-        id: q10_correct
+        id: ingress_object
         lines:
           - Ingress
       SERVICE_OBJECT:
-        id: q10_decoy1
+        id: service_object
         lines:
           - Service
       NETWORK_POLICY:
-        id: q10_decoy2
+        id: network_policy
         lines:
           - NetworkPolicy
       ENDPOINT_SLICE:
-        id: q10_decoy3
+        id: endpoint_slice
         lines:
           - EndpointSlice
       NODEPORT:
-        id: q10_decoy4
+        id: nodeport
         lines:
           - NodePort
       LOADBALANCER:
-        id: q10_decoy5
+        id: loadbalancer
         lines:
           - LoadBalancer
+      RBAC_ROLE:
+        id: rbac_role
+        lines:
+          - Role
+      RBAC_CLUSTERROLE:
+        id: rbac_clusterrole
+        lines:
+          - ClusterRole
+      RBAC_BINDING:
+        id: rbac_binding
+        lines:
+          - RoleBinding
+      RBAC_SA:
+        id: rbac_sa
+        lines:
+          - ServiceAccount
+      RBAC_USER:
+        id: rbac_user
+        lines:
+          - User
+      RBAC_GROUP:
+        id: rbac_group
+        lines:
+          - Group
+      RBAC_PSP:
+        id: rbac_psp
+        lines:
+          - PodSecurityPolicy
+      DAEMONSET:
+        id: daemonset
+        lines:
+          - DaemonSet
+      STATEFULSET:
+        id: statefulset
+        lines:
+          - StatefulSet
+      JOB_UNIT:
+        id: job_unit
+        lines:
+          - Job
+      CRONJOB_UNIT:
+        id: cronjob_unit
+        lines:
+          - CronJob
+      HELM_CHART:
+        id: helm_chart
+        lines:
+          - Chart
+      HELM_RELEASE:
+        id: helm_release
+        lines:
+          - Release
+      HELM_REPO:
+        id: helm_repo
+        lines:
+          - Repository
+      HELM_TEMPLATE:
+        id: helm_template
+        lines:
+          - Template
+      HELM_VALUES:
+        id: helm_values
+        lines:
+          - Values
+      HELM_REVISION:
+        id: helm_revision
+        lines:
+          - Revision
+      HELM_HOOK:
+        id: helm_hook
+        lines:
+          - Hook
+      HPA_SCALER:
+        id: hpa_scaler
+        lines:
+          - HorizontalPodAutoscaler
+      VPA_SCALER:
+        id: vpa_scaler
+        lines:
+          - VerticalPodAutoscaler
+      CA_SCALER:
+        id: ca_scaler
+        lines:
+          - ClusterAutoscaler
+      KEDA_SCALER:
+        id: keda_scaler
+        lines:
+          - KEDA
+      SERVERLESS_SCALER:
+        id: serverless_scaler
+        lines:
+          - Knative Service
+      NODE_SCALER:
+        id: node_scaler
+        lines:
+          - Node Auto-provisioning
+      MANUAL_SCALER:
+        id: manual_scaler
+        lines:
+          - Manual Scaling
+      PVC_STORAGE:
+        id: pvc_storage
+        lines:
+          - PersistentVolumeClaim
+      PV_STORAGE:
+        id: pv_storage
+        lines:
+          - PersistentVolume
+      SC_STORAGE:
+        id: sc_storage
+        lines:
+          - StorageClass
+      CSI_DRIVER:
+        id: csi_driver
+        lines:
+          - CSI Driver
+      EMPTY_DIR:
+        id: empty_dir
+        lines:
+          - emptyDir
+      HOST_PATH:
+        id: host_path
+        lines:
+          - hostPath
+      VOLUME_MOUNT:
+        id: volume_mount
+        lines:
+          - VolumeMount
+      KUBECTL_DESCRIBE:
+        id: k_describe
+        lines:
+          - kubectl describe
+      KUBECTL_EXPLAIN:
+        id: k_explain
+        lines:
+          - kubectl explain
+      KUBECTL_LOGS:
+        id: k_logs
+        lines:
+          - kubectl logs
+      KUBECTL_EVENTS:
+        id: k_events
+        lines:
+          - kubectl events
+      KUBECTL_INSPECT:
+        id: k_inspect
+        lines:
+          - kubectl inspect
+      KUBECTL_STATUS:
+        id: k_status
+        lines:
+          - kubectl status
+      KUBE_SCHEDULER:
+        id: kube_scheduler
+        lines:
+          - kube-scheduler
+      KUBE_CONTROLLER_MANAGER:
+        id: kube_controller_manager
+        lines:
+          - kube-controller-manager
+      KUBE_PROXY:
+        id: kube_proxy
+        lines:
+          - kube-proxy
+      CLOUD_CONTROLLER:
+        id: cloud_controller
+        lines:
+          - cloud-controller-manager
+      COREDNS:
+        id: coredns
+        lines:
+          - CoreDNS
+      LIVENESS_PROBE:
+        id: liveness_probe
+        lines:
+          - Liveness Probe
+      READINESS_PROBE:
+        id: readiness_probe
+        lines:
+          - Readiness Probe
+      STARTUP_PROBE:
+        id: startup_probe
+        lines:
+          - Startup Probe
+      TCP_SOCKET_ACTION:
+        id: tcp_socket_action
+        lines:
+          - TCPSocket
+      HTTP_GET_ACTION:
+        id: http_get_action
+        lines:
+          - HTTPGet
+      EXEC_ACTION:
+        id: exec_action
+        lines:
+          - Exec
+      GRPC_ACTION:
+        id: grpc_action
+        lines:
+          - GRPC
+      NAMESPACE_ISOLATION:
+        id: namespace_isolation
+        lines:
+          - Namespace
+      QUOTA_LIMIT:
+        id: quota_limit
+        lines:
+          - ResourceQuota
+      LIMIT_RANGE:
+        id: limit_range
+        lines:
+          - LimitRange
+      POD_SECURITY:
+        id: pod_security
+        lines:
+          - PodSecurity
+      CONTEXT_SWITCH:
+        id: context_switch
+        lines:
+          - Context
+      CLUSTER_INFO:
+        id: cluster_info
+        lines:
+          - ClusterInfo
+      SIDECAR_PATTERN:
+        id: sidecar_pattern
+        lines:
+          - Sidecar
+      ADAPTER_PATTERN:
+        id: adapter_pattern
+        lines:
+          - Adapter
+      AMBASSADOR_PATTERN:
+        id: ambassador_pattern
+        lines:
+          - Ambassador
+      INIT_CONTAINER:
+        id: init_container
+        lines:
+          - InitContainer
+      EPHEMERAL_CONTAINER:
+        id: ephemeral_container
+        lines:
+          - EphemeralContainer
+      SINGLETON_PATTERN:
+        id: singleton_pattern
+        lines:
+          - Singleton
+      BUILDER_PATTERN:
+        id: builder_pattern
+        lines:
+          - Builder
+      FALCO_SEC:
+        id: falco_sec
+        lines:
+          - Falco
+      OPA_SEC:
+        id: opa_sec
+        lines:
+          - Open Policy Agent (OPA)
+      NOTARY_SEC:
+        id: notary_sec
+        lines:
+          - Notary
+      CLAIR_SEC:
+        id: clair_sec
+        lines:
+          - Clair
+      TRIVY_SEC:
+        id: trivy_sec
+        lines:
+          - Trivy
+      CLUSTER_IP:
+        id: cluster_ip
+        lines:
+          - ClusterIP
+      EXTERNAL_NAME:
+        id: external_name
+        lines:
+          - ExternalName
+      HEADLESS_SVC:
+        id: headless_svc
+        lines:
+          - Headless Service
+      GIT_REPO:
+        id: git_repo
+        lines:
+          - Git Repository
+      IMAGE_REGISTRY:
+        id: image_registry
+        lines:
+          - Image Registry
+      DISTRIBUTED_TRACING:
+        id: distributed_tracing
+        lines:
+          - Distributed Tracing
+      METRICS_AGG:
+        id: metrics_agg
+        lines:
+          - Metrics Aggregation
+      LOG_AGG:
+        id: log_agg
+        lines:
+          - Log Aggregation
+      CNI_PLUGIN:
+        id: cni_plugin
+        lines:
+          - CNI Plugin
+      CSI_PLUGIN:
+        id: csi_plugin
+        lines:
+          - CSI Plugin
+      ACCESS_RWO:
+        id: access_rwo
+        lines:
+          - ReadWriteOnce
+      ACCESS_RWX:
+        id: access_rwx
+        lines:
+          - ReadWriteMany
+      ACCESS_ROX:
+        id: access_rox
+        lines:
+          - ReadOnlyMany
+      KNATIVE_SERV:
+        id: knative_serv
+        lines:
+          - Knative
+      OPENFAAS_SERV:
+        id: openfaas_serv
+        lines:
+          - OpenFaaS
     rounds:
       - prompt:
-          text: What are the four pillars of the Cloud Native Computing Foundation (CNCF)
-            definition of 'Cloud Native'
+          text: What are the four pillars of the Cloud Native Computing Foundation (CNCF) definition of 'Cloud Native'
         tag: cloud-native-architecture
         answers:
           - FOUR_PILLARS
@@ -363,7 +694,7 @@ decks:
           - DOCKER
           - INGRESS_CONTROLLER
           - METRICS_SERVER
-        correctAnswerId: q2_correct
+        correctAnswerId: kube_api_server
       - prompt:
           text: What is the primary purpose of a Kubernetes Service?
         tag: kubernetes-fundamentals
@@ -374,7 +705,7 @@ decks:
           - SERVICE_PACKAGE_APP
           - SERVICE_INGRESS
           - SERVICE_LOAD_BALANCE
-        correctAnswerId: q3_correct
+        correctAnswerId: service_stable_endpoint
       - prompt:
           text: What is the role of etcd in a Kubernetes cluster?
         tag: kubernetes-fundamentals
@@ -385,7 +716,7 @@ decks:
           - ETCD_PROVIDE_MESH
           - ETCD_BACKUP_STATE
           - ETCD_AUTHENTICATE
-        correctAnswerId: q4_correct
+        correctAnswerId: etcd_store_state
       - prompt:
           text: Which of the following is a 'Graduated' CNCF project?
         tag: cloud-native-ecosystem
@@ -396,7 +727,7 @@ decks:
           - BACKSTAGE
           - SPINNAKER
           - NATS
-        correctAnswerId: q5_correct
+        correctAnswerId: prometheus
       - prompt:
           text: Which of the following is a CRI-compliant container runtime?
         tag: container-orchestration
@@ -406,7 +737,7 @@ decks:
           - CRI_RKT
           - CRI_LXC
           - RUNV
-        correctAnswerId: q6_correct
+        correctAnswerId: cri_containerd
       - prompt:
           text: How are ConfigMaps typically used in Kubernetes?
         tag: cloud-native-application-delivery
@@ -417,10 +748,9 @@ decks:
           - CONFIGMAP_DESIRED_STATE
           - CONFIGMAP_INJECT_SIDECAR
           - CONFIGMAP_DEFINE_NETWORK
-        correctAnswerId: q7_correct
+        correctAnswerId: configmap_decouple
       - prompt:
-          text: What is the smallest and simplest unit in the Kubernetes object model
-            that you create or deploy?
+          text: What is the smallest and simplest unit in the Kubernetes object model that you create or deploy?
         tag: kubernetes-fundamentals
         answers:
           - POD_UNIT
@@ -429,10 +759,9 @@ decks:
           - DEPLOYMENT_UNIT
           - SERVICE_UNIT
           - REPLICASET_UNIT
-        correctAnswerId: q8_correct
+        correctAnswerId: pod_unit
       - prompt:
-          text: What behavior does a standard Kubernetes Deployment trigger when you
-            update its pod template (e.g., container image)?
+          text: What behavior does a standard Kubernetes Deployment trigger when you update its pod template?
         tag: cloud-native-application-delivery
         answers:
           - ROLLING_UPDATE
@@ -441,10 +770,9 @@ decks:
           - AUTO_SCALE_UP
           - BLUE_GREEN
           - CANARY
-        correctAnswerId: q9_correct
+        correctAnswerId: rolling_update
       - prompt:
-          text: Which Kubernetes object provides HTTP routing for services, allowing
-            you to expose them externally?
+          text: Which Kubernetes object provides HTTP routing for services, allowing you to expose them externally?
         tag: kubernetes-fundamentals
         answers:
           - INGRESS_OBJECT
@@ -453,7 +781,235 @@ decks:
           - ENDPOINT_SLICE
           - NODEPORT
           - LOADBALANCER
-        correctAnswerId: q10_correct
+        correctAnswerId: ingress_object
+      - prompt:
+          text: Which RBAC object contains rules representing a set of permissions within a specific namespace?
+        tag: kubernetes-security
+        answers:
+          - RBAC_ROLE
+          - RBAC_CLUSTERROLE
+          - RBAC_BINDING
+          - RBAC_SA
+          - RBAC_USER
+          - RBAC_GROUP
+          - RBAC_PSP
+        correctAnswerId: rbac_role
+      - prompt:
+          text: Which workload object ensures that a copy of a Pod runs on all (or some) Nodes in the cluster?
+        tag: kubernetes-workloads
+        answers:
+          - DAEMONSET
+          - DEPLOYMENT_UNIT
+          - REPLICASET_UNIT
+          - STATEFULSET
+          - JOB_UNIT
+          - CRONJOB_UNIT
+          - POD_UNIT
+        correctAnswerId: daemonset
+      - prompt:
+          text: What is the packaging format used by Helm?
+        tag: cloud-native-application-delivery
+        answers:
+          - HELM_CHART
+          - HELM_RELEASE
+          - HELM_REPO
+          - HELM_TEMPLATE
+          - HELM_VALUES
+          - HELM_REVISION
+          - HELM_HOOK
+        correctAnswerId: helm_chart
+      - prompt:
+          text: Which controller automatically scales the number of Pods based on observed CPU utilization?
+        tag: kubernetes-workloads
+        answers:
+          - HPA_SCALER
+          - VPA_SCALER
+          - CA_SCALER
+          - KEDA_SCALER
+          - SERVERLESS_SCALER
+          - NODE_SCALER
+          - MANUAL_SCALER
+        correctAnswerId: hpa_scaler
+      - prompt:
+          text: Which object allows a user to request storage resources without knowing the details of the underlying infrastructure?
+        tag: kubernetes-storage
+        answers:
+          - PVC_STORAGE
+          - PV_STORAGE
+          - SC_STORAGE
+          - CSI_DRIVER
+          - EMPTY_DIR
+          - HOST_PATH
+          - VOLUME_MOUNT
+        correctAnswerId: pvc_storage
+      - prompt:
+          text: Which command allows you to view detailed state and event information about a specific resource?
+        tag: kubernetes-fundamentals
+        answers:
+          - KUBECTL_DESCRIBE
+          - KUBECTL_EXPLAIN
+          - KUBECTL_LOGS
+          - KUBECTL_EVENTS
+          - KUBECTL_INSPECT
+          - KUBECTL_STATUS
+          - KUBECTL_GET_PODS
+        correctAnswerId: k_describe
+      - prompt:
+          text: Which Control Plane component selects which node an unscheduled Pod should run on?
+        tag: kubernetes-architecture
+        answers:
+          - KUBE_SCHEDULER
+          - KUBE_CONTROLLER_MANAGER
+          - KUBE_PROXY
+          - KUBELET
+          - CLOUD_CONTROLLER
+          - COREDNS
+          - KUBE_API_SERVER
+        correctAnswerId: kube_scheduler
+      - prompt:
+          text: Which type of Probe determines if a container is ready to accept traffic?
+        tag: kubernetes-application-delivery
+        answers:
+          - READINESS_PROBE
+          - LIVENESS_PROBE
+          - STARTUP_PROBE
+          - TCP_SOCKET_ACTION
+          - HTTP_GET_ACTION
+          - EXEC_ACTION
+          - GRPC_ACTION
+        correctAnswerId: readiness_probe
+      - prompt:
+          text: Which Kubernetes feature provides a scope for names and divides cluster resources between multiple users?
+        tag: kubernetes-fundamentals
+        answers:
+          - NAMESPACE_ISOLATION
+          - QUOTA_LIMIT
+          - LIMIT_RANGE
+          - NETWORK_POLICY
+          - POD_SECURITY
+          - CONTEXT_SWITCH
+          - CLUSTER_INFO
+        correctAnswerId: namespace_isolation
+      - prompt:
+          text: Which multi-container pattern involves a helper container augmenting the main container (e.g., log forwarding)?
+        tag: cloud-native-architecture
+        answers:
+          - SIDECAR_PATTERN
+          - ADAPTER_PATTERN
+          - AMBASSADOR_PATTERN
+          - INIT_CONTAINER
+          - EPHEMERAL_CONTAINER
+          - SINGLETON_PATTERN
+          - BUILDER_PATTERN
+        correctAnswerId: sidecar_pattern
+      - prompt:
+          text: Which CNCF project is considered the de facto standard for runtime security and threat detection in Kubernetes?
+        tag: kubernetes-security
+        answers:
+          - FALCO_SEC
+          - OPA_SEC
+          - NOTARY_SEC
+          - CLAIR_SEC
+          - TRIVY_SEC
+          - KYVERNO
+          - PROMETHEUS
+        correctAnswerId: falco_sec
+      - prompt:
+          text: Which Service type exposes the Service on a static port on the IP address of each Node?
+        tag: kubernetes-networking
+        answers:
+          - NODEPORT
+          - CLUSTER_IP
+          - LOADBALANCER
+          - EXTERNAL_NAME
+          - INGRESS_OBJECT
+          - HEADLESS_SVC
+          - ENDPOINT_SLICE
+        correctAnswerId: nodeport
+      - prompt:
+          text: In a GitOps workflow, what serves as the single source of truth for the desired state of the system?
+        tag: gitops
+        answers:
+          - GIT_REPO
+          - IMAGE_REGISTRY
+          - HELM_CHART
+          - ETCD_STORE_STATE
+          - CI_SERVER
+          - KUBE_API_SERVER
+          - DOCKER
+        correctAnswerId: git_repo
+      - prompt:
+          text: Which telemetry type provides insight into the lifecycle of a request as it traverses distributed microservices?
+        tag: observability
+        answers:
+          - DISTRIBUTED_TRACING
+          - METRICS_AGG
+          - LOG_AGG
+          - GOLDEN_SIGNALS
+          - PROMETHEUS
+          - READINESS_PROBE
+          - LIVENESS_PROBE
+        correctAnswerId: distributed_tracing
+      - prompt:
+          text: What standard interface handles the insertion of a network interface into a container namespace?
+        tag: kubernetes-networking
+        answers:
+          - CNI_PLUGIN
+          - CSI_PLUGIN
+          - CRI_CONTAINERD
+          - KUBE_PROXY
+          - CORE_DNS
+          - INGRESS_CONTROLLER
+          - NETWORK_POLICY
+        correctAnswerId: cni_plugin
+      - prompt:
+          text: Which workload controller is best suited for running a batch process that terminates once the task is complete?
+        tag: kubernetes-workloads
+        answers:
+          - JOB_UNIT
+          - CRONJOB_UNIT
+          - DEPLOYMENT_UNIT
+          - STATEFULSET
+          - DAEMONSET
+          - REPLICASET_UNIT
+          - POD_UNIT
+        correctAnswerId: job_unit
+      - prompt:
+          text: Which PersistentVolume access mode allows the volume to be mounted as read-write by a single node?
+        tag: kubernetes-storage
+        answers:
+          - ACCESS_RWO
+          - ACCESS_RWX
+          - ACCESS_ROX
+          - STORAGE_CLASS
+          - PVC_STORAGE
+          - HOST_PATH
+          - EMPTY_DIR
+        correctAnswerId: access_rwo
+      - prompt:
+          text: Which CNCF project allows you to run serverless workloads on top of Kubernetes?
+        tag: cloud-native-application-delivery
+        answers:
+          - KNATIVE_SERV
+          - OPENFAAS_SERV
+          - KEDA_SCALER
+          - HELM_CHART
+          - PROMETHEUS
+          - NATS
+          - SPINNAKER
+        correctAnswerId: knative_serv
+      - prompt:
+          text: Which tool is primarily used to sign and verify container images to ensure supply chain security?
+        tag: kubernetes-security
+        answers:
+          - NOTARY_SEC
+          - FALCO_SEC
+          - OPA_SEC
+          - TRIVY_SEC
+          - CLAIR_SEC
+          - KYVERNO
+          - IMAGE_REGISTRY
+        correctAnswerId: notary_sec
   KCSA:
     passingPercentage: 75
     answers:
