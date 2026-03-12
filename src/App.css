@@ -163,8 +163,8 @@ body.dark-mode {
 
 .dark-mode .prompt-banner,
 .dark-mode .bg-light {
-    background-color: #3c4043 !important; /* Lighter 'charcoal' background */
-    border: 1px solid #4f5357; /* Subtle border for definition */
+    background-color: #1c2023 !important; /* Darker 'charcoal' background */
+    border: 1px solid #3f4347; /* Subtle border for definition */
 }
 
 .dark-mode .text-dark {

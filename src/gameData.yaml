@@ -31,8 +31,8 @@ studyGuides:
     link: https://github.com/aquasecurity/trivy
   runtime-security:
     title: Runtime Security
-    tip: Learn about tools like Falco that monitor for unexpected application behavior
-      and threats at runtime.
+    tip: Learn about Falco for kernel-level threat detection, and Kubernetes
+      audit logging to record every API server request for forensic analysis.
     link: https://falco.org/docs/
   network-security:
     title: Network Security
@@ -48,18 +48,80 @@ studyGuides:
     tip: Review core Kubernetes security concepts like Role-Based Access Control
       (RBAC) to control who can do what in the cluster.
     link: https://kubernetes.io/docs/reference/access-authn-authz/rbac/
+  kubernetes-security:
+    title: Kubernetes Security
+    tip: Study RBAC objects (Role, ClusterRole, RoleBinding, ClusterRoleBinding)
+      and how they control access to cluster resources.
+    link: https://kubernetes.io/docs/reference/access-authn-authz/rbac/
+  kubernetes-workloads:
+    title: Kubernetes Workloads
+    tip: Understand the different workload controllers — Deployment, DaemonSet,
+      StatefulSet, Job, and CronJob — and when to use each.
+    link: https://kubernetes.io/docs/concepts/workloads/controllers/
+  kubernetes-storage:
+    title: Kubernetes Storage
+    tip: Learn about PersistentVolumes, PersistentVolumeClaims, StorageClasses,
+      and the CSI standard for attaching storage to pods.
+    link: https://kubernetes.io/docs/concepts/storage/
+  kubernetes-architecture:
+    title: Kubernetes Architecture
+    tip: Review the control plane components (kube-apiserver, kube-scheduler,
+      kube-controller-manager, etcd) and the node components (kubelet, kube-proxy).
+    link: https://kubernetes.io/docs/concepts/overview/components/
+  kubernetes-application-delivery:
+    title: Kubernetes Application Delivery
+    tip: Study pod lifecycle probes — Liveness, Readiness, and Startup — and
+      how they affect traffic routing and container restarts.
+    link: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/
+  kubernetes-networking:
+    title: Kubernetes Networking
+    tip: Learn the CNI standard, Service types (ClusterIP, NodePort, LoadBalancer),
+      Ingress, and NetworkPolicy for controlling pod traffic.
+    link: https://kubernetes.io/docs/concepts/services-networking/
+  gitops:
+    title: GitOps
+    tip: Understand how GitOps uses a Git repository as the single source of
+      truth for declarative infrastructure, with tools like Argo CD or Flux.
+    link: https://opengitops.dev/
+  observability:
+    title: Observability
+    tip: Study the three pillars of observability — metrics, logs, and traces —
+      and CNCF projects like Prometheus, Fluentd, and Jaeger.
+    link: https://opentelemetry.io/docs/concepts/observability-primer/
+  cloud-native-security:
+    title: Cloud Native Security
+    tip: The 4 C's (Cloud, Cluster, Container, Code) describe the layers of
+      defense. Security at each outer layer strengthens all inner layers.
+    link: https://kubernetes.io/docs/concepts/security/overview/
+  container-security:
+    title: Container Security
+    tip: Apply least privilege by running containers as non-root, dropping
+      capabilities, and using seccomp/AppArmor profiles to restrict syscalls.
+    link: https://kubernetes.io/docs/concepts/security/pod-security-standards/
+  supply-chain-security:
+    title: Supply Chain Security
+    tip: Use image signing (Cosign/Notary), SBOMs, and admission policies to
+      ensure only trusted, verified images run in your cluster.
+    link: https://slsa.dev/
+  compliance-security:
+    title: Compliance & Security Frameworks
+    tip: The CIS Kubernetes Benchmark provides hardening guidelines. Use tools
+      like kube-bench to automatically check your cluster against them.
+    link: https://www.cisecurity.org/benchmark/kubernetes
 decks:
   KCNA:
     passingPercentage: 75
     answers:
       FOUR_PILLARS:
         id: four_pillars
-        title: The Four Pillars
+        title: CNCF Cloud Native
+        titlealt: Technologies
         lines:
           - Containers
+          - Service Meshes
           - Microservices
-          - Service Mesh
           - Immutable Infrastructure
+          - Declarative APIs
       FOUR_CS:
         id: four_cs
         title: The 4 C's of
@@ -211,6 +273,10 @@ decks:
         id: nats
         lines:
           - NATS
+      DAPR:
+        id: dapr
+        lines:
+          - Dapr
       KYVERNO:
         id: kyverno
         lines:
@@ -615,6 +681,10 @@ decks:
         id: headless_svc
         lines:
           - Headless Service
+      CI_SERVER:
+        id: ci_server
+        lines:
+          - CI Server
       GIT_REPO:
         id: git_repo
         lines:
@@ -665,7 +735,7 @@ decks:
           - OpenFaaS
     rounds:
       - prompt:
-          text: What are the four pillars of the Cloud Native Computing Foundation (CNCF) definition of 'Cloud Native'
+          text: Which of the following best represents the cloud-native technology approaches exemplified in the official CNCF definition?
         tag: cloud-native-architecture
         answers:
           - FOUR_PILLARS
@@ -724,7 +794,7 @@ decks:
           - PROMETHEUS
           - KYVERNO
           - OPERATOR_FRAMEWORK
-          - BACKSTAGE
+          - DAPR
           - SPINNAKER
           - NATS
         correctAnswerId: prometheus
@@ -958,7 +1028,7 @@ decks:
           - CSI_PLUGIN
           - CRI_CONTAINERD
           - KUBE_PROXY
-          - CORE_DNS
+          - COREDNS
           - INGRESS_CONTROLLER
           - NETWORK_POLICY
         correctAnswerId: cni_plugin
@@ -981,7 +1051,7 @@ decks:
           - ACCESS_RWO
           - ACCESS_RWX
           - ACCESS_ROX
-          - STORAGE_CLASS
+          - SC_STORAGE
           - PVC_STORAGE
           - HOST_PATH
           - EMPTY_DIR
@@ -1064,27 +1134,27 @@ decks:
       NETPOL_DENY:
         id: kcsa_q3_correct
         lines:
-          - Deny all ingress and egress traffic.
+          - All traffic is allowed; pods are non-isolated.
       NETPOL_DECOY1:
         id: kcsa_q3_decoy1
         lines:
-          - Allow all ingress and egress traffic.
+          - All ingress traffic is denied by default.
       NETPOL_DECOY2:
         id: kcsa_q3_decoy2
         lines:
-          - Allow only ingress traffic.
+          - All egress traffic is denied by default.
       NETPOL_DECOY3:
         id: kcsa_q3_decoy3
         lines:
-          - Allow only egress traffic.
+          - Only traffic within the same namespace is allowed.
       NETPOL_DECOY4:
         id: kcsa_q3_decoy4
         lines:
-          - Deny all traffic within the namespace.
+          - All ingress and egress traffic is denied.
       NETPOL_DECOY5:
         id: kcsa_q3_decoy5
         lines:
-          - Allow traffic from all namespaces.
+          - Only traffic matching a label selector is allowed.
       KYVERNO_POLICY:
         id: kcsa_q4_correct
         lines:
@@ -1134,6 +1204,265 @@ decks:
         id: kcsa_q5_decoy5
         lines:
           - It authenticates a user.
+
+      # Q6 — 4 C's of Cloud Native Security
+      FOUR_CS_CORRECT:
+        id: kcsa_q6_correct
+        title: The 4 C's of
+        titlealt: Cloud Native Security
+        lines:
+          - Cloud
+          - Cluster
+          - Container
+          - Code
+      FOUR_CS_DECOY1:
+        id: kcsa_q6_decoy1
+        lines:
+          - Control, Container, Cluster, Code
+      FOUR_CS_DECOY2:
+        id: kcsa_q6_decoy2
+        lines:
+          - Cloud, Configuration, Container, Code
+      FOUR_CS_DECOY3:
+        id: kcsa_q6_decoy3
+        lines:
+          - Cluster, Control-Plane, Container, CI/CD
+      FOUR_CS_DECOY4:
+        id: kcsa_q6_decoy4
+        lines:
+          - Cloud, Cluster, Credentials, Code
+
+      # Q7 — Pod Security Standards
+      PSS_CORRECT:
+        id: kcsa_q7_correct
+        title: Pod Security Standards
+        lines:
+          - Privileged
+          - Baseline
+          - Restricted
+      PSS_DECOY1:
+        id: kcsa_q7_decoy1
+        lines:
+          - Open, Locked, Audited
+      PSS_DECOY2:
+        id: kcsa_q7_decoy2
+        lines:
+          - Default, Limited, Strict
+      PSS_DECOY3:
+        id: kcsa_q7_decoy3
+        lines:
+          - Permissive, Enforced, Audited
+      PSS_DECOY4:
+        id: kcsa_q7_decoy4
+        lines:
+          - Basic, Intermediate, Advanced
+
+      # Q8 — seccomp
+      SECCOMP_CORRECT:
+        id: kcsa_q8_correct
+        lines:
+          - seccomp (Secure Computing Mode)
+      SECCOMP_DECOY1:
+        id: kcsa_q8_decoy1
+        lines:
+          - AppArmor
+      SECCOMP_DECOY2:
+        id: kcsa_q8_decoy2
+        lines:
+          - SELinux
+      SECCOMP_DECOY3:
+        id: kcsa_q8_decoy3
+        lines:
+          - cgroups
+      SECCOMP_DECOY4:
+        id: kcsa_q8_decoy4
+        lines:
+          - namespaces
+
+      # Q9 — image signing / Cosign
+      COSIGN_CORRECT:
+        id: kcsa_q9_correct
+        lines:
+          - Cosign
+      COSIGN_DECOY1:
+        id: kcsa_q9_decoy1
+        lines:
+          - Trivy
+      COSIGN_DECOY2:
+        id: kcsa_q9_decoy2
+        lines:
+          - Falco
+      COSIGN_DECOY3:
+        id: kcsa_q9_decoy3
+        lines:
+          - Kyverno
+      COSIGN_DECOY4:
+        id: kcsa_q9_decoy4
+        lines:
+          - Harbor
+
+      # Q10 — audit logging
+      AUDIT_CORRECT:
+        id: kcsa_q10_correct
+        lines:
+          - Requests made to the Kubernetes API server, including who made them
+            and what action was taken.
+      AUDIT_DECOY1:
+        id: kcsa_q10_decoy1
+        lines:
+          - CPU and memory usage of each pod.
+      AUDIT_DECOY2:
+        id: kcsa_q10_decoy2
+        lines:
+          - Network traffic between pods.
+      AUDIT_DECOY3:
+        id: kcsa_q10_decoy3
+        lines:
+          - Container image vulnerability scan results.
+      AUDIT_DECOY4:
+        id: kcsa_q10_decoy4
+        lines:
+          - etcd read and write operations only.
+
+      # Q11 — mTLS
+      MTLS_CORRECT:
+        id: kcsa_q11_correct
+        lines:
+          - Both client and server present certificates to verify each other's
+            identity; commonly provided by service meshes like Istio or Linkerd.
+      MTLS_DECOY1:
+        id: kcsa_q11_decoy1
+        lines:
+          - Only the server presents a certificate; the client is anonymous.
+      MTLS_DECOY2:
+        id: kcsa_q11_decoy2
+        lines:
+          - Traffic is encrypted but neither party is authenticated.
+      MTLS_DECOY3:
+        id: kcsa_q11_decoy3
+        lines:
+          - The client presents a certificate; the server uses a shared secret.
+      MTLS_DECOY4:
+        id: kcsa_q11_decoy4
+        lines:
+          - Certificates are optional; mTLS falls back to plaintext if unavailable.
+
+      # Q12 — Secrets
+      SECRET_CORRECT:
+        id: kcsa_q12_correct
+        lines:
+          - Store sensitive data such as passwords or tokens; values are
+            base64-encoded, not encrypted at rest by default.
+      SECRET_DECOY1:
+        id: kcsa_q12_decoy1
+        lines:
+          - Store non-sensitive configuration data for pods.
+      SECRET_DECOY2:
+        id: kcsa_q12_decoy2
+        lines:
+          - Enforce network access rules between pods.
+      SECRET_DECOY3:
+        id: kcsa_q12_decoy3
+        lines:
+          - Store sensitive data with AES-256 encryption enabled by default.
+      SECRET_DECOY4:
+        id: kcsa_q12_decoy4
+        lines:
+          - Provide persistent storage volumes for stateful applications.
+
+      # Q13 — CIS Benchmark
+      CIS_CORRECT:
+        id: kcsa_q13_correct
+        lines:
+          - Prescriptive security configuration guidelines and hardening
+            recommendations for Kubernetes clusters.
+      CIS_DECOY1:
+        id: kcsa_q13_decoy1
+        lines:
+          - A runtime security monitoring tool for detecting threats.
+      CIS_DECOY2:
+        id: kcsa_q13_decoy2
+        lines:
+          - A policy engine for enforcing admission control rules.
+      CIS_DECOY3:
+        id: kcsa_q13_decoy3
+        lines:
+          - A vulnerability scanner for container images.
+      CIS_DECOY4:
+        id: kcsa_q13_decoy4
+        lines:
+          - A compliance framework for PCI-DSS audits only.
+
+      # Q14 — SBOM
+      SBOM_CORRECT:
+        id: kcsa_q14_correct
+        lines:
+          - Software Bill of Materials — a formal inventory of all components,
+            libraries, and dependencies in a software artifact.
+      SBOM_DECOY1:
+        id: kcsa_q14_decoy1
+        lines:
+          - A signed manifest that proves an image was built from a trusted
+            source.
+      SBOM_DECOY2:
+        id: kcsa_q14_decoy2
+        lines:
+          - A list of CVEs found during a container image vulnerability scan.
+      SBOM_DECOY3:
+        id: kcsa_q14_decoy3
+        lines:
+          - A Kubernetes resource that tracks deployed workload versions.
+      SBOM_DECOY4:
+        id: kcsa_q14_decoy4
+        lines:
+          - A policy document that restricts which container registries are
+            trusted.
+
+      # Q16 — PSS admission controller
+      PSS_AC_CORRECT:
+        id: kcsa_q16_correct
+        lines:
+          - PodSecurity (the built-in admission controller, replacing the
+            deprecated PodSecurityPolicy)
+      PSS_AC_DECOY1:
+        id: kcsa_q16_decoy1
+        lines:
+          - PodSecurityPolicy (PSP)
+      PSS_AC_DECOY2:
+        id: kcsa_q16_decoy2
+        lines:
+          - Kyverno
+      PSS_AC_DECOY3:
+        id: kcsa_q16_decoy3
+        lines:
+          - Open Policy Agent (OPA) Gatekeeper
+      PSS_AC_DECOY4:
+        id: kcsa_q16_decoy4
+        lines:
+          - ResourceQuota
+
+      # Q15 — least privilege / non-root
+      NONROOT_CORRECT:
+        id: kcsa_q15_correct
+        lines:
+          - Run as a non-root user and drop all unnecessary Linux capabilities.
+      NONROOT_DECOY1:
+        id: kcsa_q15_decoy1
+        lines:
+          - Run as root to ensure the container has full access to the host.
+      NONROOT_DECOY2:
+        id: kcsa_q15_decoy2
+        lines:
+          - Use a privileged pod so the container can manage host resources.
+      NONROOT_DECOY3:
+        id: kcsa_q15_decoy3
+        lines:
+          - Share the host network namespace to simplify service discovery.
+      NONROOT_DECOY4:
+        id: kcsa_q15_decoy4
+        lines:
+          - Mount the host filesystem so the container can read node logs.
+
     rounds:
       - prompt:
           text: What is the primary function of Trivy in a Kubernetes environment?
@@ -1159,7 +1488,7 @@ decks:
           - FALCO_DECOY5
         correctAnswerId: kcsa_q2_correct
       - prompt:
-          text: What is the default behavior of a Kubernetes NetworkPolicy?
+          text: A cluster has no NetworkPolicy resources. What is the default network behavior for pods?
         tag: network-security
         answers:
           - NETPOL_DENY
@@ -1193,3 +1522,118 @@ decks:
           - RBAC_DECOY4
           - RBAC_DECOY5
         correctAnswerId: kcsa_q5_correct
+      - prompt:
+          text: What are the four layers of the '4 C's of Cloud Native Security'?
+        tag: cloud-native-security
+        answers:
+          - FOUR_CS_CORRECT
+          - FOUR_CS_DECOY1
+          - FOUR_CS_DECOY2
+          - FOUR_CS_DECOY3
+          - FOUR_CS_DECOY4
+        correctAnswerId: kcsa_q6_correct
+      - prompt:
+          text: What are the three Pod Security Standard profiles defined by Kubernetes?
+        tag: security-fundamentals
+        answers:
+          - PSS_CORRECT
+          - PSS_DECOY1
+          - PSS_DECOY2
+          - PSS_DECOY3
+          - PSS_DECOY4
+        correctAnswerId: kcsa_q7_correct
+      - prompt:
+          text: Which Linux kernel feature allows you to restrict the syscalls a
+            container process is allowed to make?
+        tag: container-security
+        answers:
+          - SECCOMP_CORRECT
+          - SECCOMP_DECOY1
+          - SECCOMP_DECOY2
+          - SECCOMP_DECOY3
+          - SECCOMP_DECOY4
+        correctAnswerId: kcsa_q8_correct
+      - prompt:
+          text: Which tool from the Sigstore project is used to sign and verify
+            container image signatures for supply chain integrity?
+        tag: supply-chain-security
+        answers:
+          - COSIGN_CORRECT
+          - COSIGN_DECOY1
+          - COSIGN_DECOY2
+          - COSIGN_DECOY3
+          - COSIGN_DECOY4
+        correctAnswerId: kcsa_q9_correct
+      - prompt:
+          text: What does Kubernetes audit logging record?
+        tag: runtime-security
+        answers:
+          - AUDIT_CORRECT
+          - AUDIT_DECOY1
+          - AUDIT_DECOY2
+          - AUDIT_DECOY3
+          - AUDIT_DECOY4
+        correctAnswerId: kcsa_q10_correct
+      - prompt:
+          text: What distinguishes mutual TLS (mTLS) from standard TLS?
+        tag: security-fundamentals
+        answers:
+          - MTLS_CORRECT
+          - MTLS_DECOY1
+          - MTLS_DECOY2
+          - MTLS_DECOY3
+          - MTLS_DECOY4
+        correctAnswerId: kcsa_q11_correct
+      - prompt:
+          text: What is the purpose of a Kubernetes Secret, and what is an important
+            limitation to be aware of?
+        tag: security-fundamentals
+        answers:
+          - SECRET_CORRECT
+          - SECRET_DECOY1
+          - SECRET_DECOY2
+          - SECRET_DECOY3
+          - SECRET_DECOY4
+        correctAnswerId: kcsa_q12_correct
+      - prompt:
+          text: What does the CIS Kubernetes Benchmark provide?
+        tag: compliance-security
+        answers:
+          - CIS_CORRECT
+          - CIS_DECOY1
+          - CIS_DECOY2
+          - CIS_DECOY3
+          - CIS_DECOY4
+        correctAnswerId: kcsa_q13_correct
+      - prompt:
+          text: What is a Software Bill of Materials (SBOM)?
+        tag: supply-chain-security
+        answers:
+          - SBOM_CORRECT
+          - SBOM_DECOY1
+          - SBOM_DECOY2
+          - SBOM_DECOY3
+          - SBOM_DECOY4
+        correctAnswerId: kcsa_q14_correct
+      - prompt:
+          text: Following the principle of least privilege, what is the recommended
+            approach for running container workloads?
+        tag: container-security
+        answers:
+          - NONROOT_CORRECT
+          - NONROOT_DECOY1
+          - NONROOT_DECOY2
+          - NONROOT_DECOY3
+          - NONROOT_DECOY4
+        correctAnswerId: kcsa_q15_correct
+      - prompt:
+          text: Which built-in Kubernetes admission controller enforces Pod Security
+            Standards, replacing the deprecated PodSecurityPolicy?
+        tag: security-fundamentals
+        answers:
+          - PSS_AC_CORRECT
+          - PSS_AC_DECOY1
+          - PSS_AC_DECOY2
+          - PSS_AC_DECOY3
+          - PSS_AC_DECOY4
+        correctAnswerId: kcsa_q16_correct
