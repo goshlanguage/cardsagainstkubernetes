@@ -2,8 +2,11 @@ name: github pages
 
 on:
   push:
-    branches:
-      - main
+#    branches:
+#      - main
+
+permissions:
+  contents: write
 
 jobs:
   deploy:
